@@ -171,9 +171,3 @@ Append to `capabilities` in `src/content/site.ts`:
 It appears on `/services` with its own anchor, and in the home page grid. To add
 a new `icon` key, extend `IconKey` in `site.ts` and the map in
 `src/components/capability-icon.tsx` — TypeScript will flag the missing entry.
-
-## Branches
-
-- `business-site` — this site
-- `author-site` — an earlier author/artist version of this project, kept for
-  reference
