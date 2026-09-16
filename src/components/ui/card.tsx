@@ -1,15 +1,15 @@
 import { cn } from "@/lib/utils";
 
+/**
+ * Card surface styles, exported separately so that an element which must be
+ * something other than a `div` — a `next/link` anchor, say — can wear the same
+ * surface without nesting one interactive element inside another.
+ */
+export const cardSurface =
+  "rounded-lg border border-ink/12 bg-white/45 backdrop-blur-[1px]";
+
 export function Card({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      className={cn(
-        "rounded-lg border border-ink/12 bg-white/45 backdrop-blur-[1px]",
-        className,
-      )}
-      {...props}
-    />
-  );
+  return <div className={cn(cardSurface, className)} {...props} />;
 }
 
 export function CardHeader({

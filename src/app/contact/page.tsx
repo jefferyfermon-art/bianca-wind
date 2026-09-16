@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/page-header";
 import { buttonVariants } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
-import { contact } from "@/content/site";
+import { brand, contact } from "@/content/site";
 import { getContactConfig } from "@/lib/contact";
 import { cn } from "@/lib/utils";
 import { ContactForm } from "./contact-form";
@@ -15,13 +15,6 @@ export const metadata: Metadata = {
   title: "Contact",
   description: contact.invitation,
 };
-
-/** What this inbox is genuinely for. */
-const goodReasons = [
-  "A question about the writing or the music",
-  "An idea for a creative collaboration",
-  "A note about something on this site",
-];
 
 export default function ContactPage() {
   const config = getContactConfig();
@@ -41,20 +34,20 @@ export default function ContactPage() {
           <div className="grid gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:gap-20">
             <div>
               <h2 className="font-serif text-2xl text-ink">
-                Good things to write about
+                Useful things to include
               </h2>
 
               <ul className="mt-6 flex flex-col gap-4">
-                {goodReasons.map((reason) => (
+                {contact.prompts.map((prompt) => (
                   <li
-                    key={reason}
+                    key={prompt}
                     className="flex items-start gap-3 text-[1.0625rem] leading-relaxed text-ink/75"
                   >
                     <span
                       aria-hidden="true"
                       className="mt-[0.7rem] h-px w-5 shrink-0 bg-gold"
                     />
-                    {reason}
+                    {prompt}
                   </li>
                 ))}
               </ul>
@@ -71,7 +64,7 @@ export default function ContactPage() {
                 <div className="rounded-lg border border-ink/15 bg-white/50 p-8">
                   <h2 className="font-serif text-2xl text-ink">By email</h2>
                   <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink/75">
-                    Messages go straight to Bianca.
+                    Enquiries go straight to {brand.name}.
                   </p>
                   <a
                     href={`mailto:${email}`}
@@ -87,28 +80,28 @@ export default function ContactPage() {
                     Not open just yet
                   </h2>
                   <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink/75">
-                    There is no contact address to publish here yet, and we
+                    There is no enquiry address to publish here yet, and we
                     would rather leave this blank than print one that does not
-                    work.
+                    reach anybody.
                   </p>
                   <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink/75">
-                    Until it opens, the writing and the music are the best way
-                    to get a sense of the work.
+                    Until it opens, the clearest picture of what we build and
+                    how a project runs is on these two pages.
                   </p>
 
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                     <Link
-                      href="/writing"
+                      href="/services"
                       className={buttonVariants({ variant: "secondary" })}
                     >
-                      The writing
+                      What we build
                       <ArrowRight aria-hidden="true" className="size-4" />
                     </Link>
                     <Link
-                      href="/music"
+                      href="/about"
                       className={buttonVariants({ variant: "secondary" })}
                     >
-                      The music
+                      How we work
                       <ArrowRight aria-hidden="true" className="size-4" />
                     </Link>
                   </div>

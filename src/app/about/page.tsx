@@ -6,46 +6,28 @@ import { PageHeader } from "@/components/page-header";
 import { buttonVariants } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
-import { author, brand } from "@/content/site";
+import { audiences, company, processSteps } from "@/content/site";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "About",
-  description: author.short,
+  description: company.short,
 };
-
-/** Short, factual notes about how the work is made. */
-const practice = [
-  {
-    id: "writing",
-    label: "Writing",
-    body: "Stories and shorter pieces, drawn from imagination and from personal experience.",
-  },
-  {
-    id: "music",
-    label: "Music",
-    body: "Songs built from some of that writing, made with AI music tools.",
-  },
-  {
-    id: "next",
-    label: "What comes next",
-    body: "Further creative projects under the same name, published here as they become real.",
-  },
-];
 
 export default function AboutPage() {
   return (
     <>
       <PageHeader
         eyebrow="About"
-        title="A name to write under"
-        description={author.short}
+        title="Built around the work"
+        description={company.short}
       />
 
       <Section>
         <Container>
           <div className="max-w-3xl">
             <div className="flex flex-col gap-6">
-              {author.about.map((paragraph) => (
+              {company.about.map((paragraph) => (
                 <p
                   key={paragraph.slice(0, 32)}
                   className="text-[1.0625rem] leading-[1.75] text-ink/80"
@@ -54,49 +36,91 @@ export default function AboutPage() {
                 </p>
               ))}
             </div>
+          </div>
 
-            <div className="mt-16 border-t border-ink/10 pt-12">
-              <h2 className="font-serif text-2xl text-ink">The work, in short</h2>
+          {/* ---------------------------------------------------------- */}
+          {/*  How we work                                               */}
+          {/* ---------------------------------------------------------- */}
+          <div className="mt-16 border-t border-ink/10 pt-14">
+            <h2 className="font-serif text-2xl text-ink sm:text-3xl">
+              How we work
+            </h2>
 
-              <dl className="mt-8 flex flex-col gap-8">
-                {practice.map((item) => (
-                  <div
-                    key={item.id}
-                    className="grid gap-2 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-8"
-                  >
-                    <dt className="eyebrow flex items-start gap-3 pt-1 text-ink/70">
-                      <span
-                        aria-hidden="true"
-                        className="mt-[0.45rem] h-px w-4 shrink-0 bg-gold"
-                      />
-                      {item.label}
-                    </dt>
-                    <dd className="text-[1.0625rem] leading-relaxed text-ink/75">
-                      {item.body}
-                    </dd>
+            <ol className="mt-10 flex flex-col gap-10">
+              {processSteps.map((step, index) => (
+                <li
+                  key={step.id}
+                  className="grid gap-3 sm:grid-cols-[4rem_minmax(0,1fr)] sm:gap-8"
+                >
+                  <span className="eyebrow pt-1 text-ink/70">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div className="max-w-2xl">
+                    <h3 className="font-serif text-xl text-ink">{step.name}</h3>
+                    <p className="mt-2 text-[1.0625rem] leading-relaxed text-ink/75">
+                      {step.body}
+                    </p>
                   </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          {/* ---------------------------------------------------------- */}
+          {/*  Who we build for                                          */}
+          {/* ---------------------------------------------------------- */}
+          <div className="mt-16 border-t border-ink/10 pt-14">
+            <h2 className="font-serif text-2xl text-ink sm:text-3xl">
+              Who we build for
+            </h2>
+
+            <div className="mt-10 grid gap-10 sm:grid-cols-2 sm:gap-16">
+              {audiences.map((audience) => (
+                <div key={audience.id}>
+                  <h3 className="flex items-center gap-3 font-serif text-xl text-ink">
+                    <span aria-hidden="true" className="h-px w-6 bg-gold" />
+                    {audience.name}
+                  </h3>
+                  <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink/75">
+                    {audience.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ---------------------------------------------------------- */}
+          {/*  Honest positioning                                        */}
+          {/* ---------------------------------------------------------- */}
+          <div className="mt-16 border-t border-ink/10 pt-14">
+            <div className="max-w-3xl rounded-lg border border-ink/12 bg-mist/45 p-8 sm:p-10">
+              <h2 className="font-serif text-2xl text-ink">
+                {company.stage.heading}
+              </h2>
+              <div className="mt-5 flex flex-col gap-4">
+                {company.stage.body.map((paragraph) => (
+                  <p
+                    key={paragraph.slice(0, 32)}
+                    className="text-[1.0625rem] leading-relaxed text-ink/80"
+                  >
+                    {paragraph}
+                  </p>
                 ))}
-              </dl>
+              </div>
             </div>
+          </div>
 
-            <div className="mt-16 flex flex-col gap-3 border-t border-ink/10 pt-12 sm:flex-row sm:gap-4">
-              <Link href="/writing" className={buttonVariants()}>
-                Read about the writing
-                <ArrowRight aria-hidden="true" className="size-4" />
-              </Link>
-              <Link
-                href="/music"
-                className={buttonVariants({ variant: "secondary" })}
-              >
-                Hear the music
-              </Link>
-            </div>
-
-            <p className="mt-10 text-sm leading-relaxed text-ink/70">
-              {brand.name} is a creative identity. The wind and weather imagery
-              used across this site is a metaphor for how the work moves, not a
-              claim about anything else.
-            </p>
+          <div className="mt-14 flex flex-col gap-3 sm:flex-row sm:gap-4">
+            <Link href="/contact" className={buttonVariants()}>
+              Start a conversation
+              <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
+            <Link
+              href="/services"
+              className={cn(buttonVariants({ variant: "secondary" }))}
+            >
+              See what we build
+            </Link>
           </div>
         </Container>
       </Section>

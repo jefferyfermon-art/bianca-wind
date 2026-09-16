@@ -1,25 +1,25 @@
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import type { Route } from "next";
 import Link from "next/link";
 
-import { ConceptCover } from "@/components/art/concept-cover";
 import { WindLines } from "@/components/art/wind-lines";
+import { CapabilityCard } from "@/components/capability-card";
 import { SectionHeading } from "@/components/section-heading";
 import { buttonVariants } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
-import { Tag } from "@/components/ui/tag";
-import { cn } from "@/lib/utils";
 import {
-  author,
+  audiences,
   brand,
+  company,
   contact,
-  getFeaturedTrack,
-  getFeaturedWriting,
+  getFeaturedCapabilities,
+  processSteps,
 } from "@/content/site";
+import { cn } from "@/lib/utils";
 
 export default function HomePage() {
-  const featuredWriting = getFeaturedWriting();
-  const featuredTrack = getFeaturedTrack();
+  const featured = getFeaturedCapabilities();
 
   return (
     <>
@@ -30,23 +30,22 @@ export default function HomePage() {
         spacing="loose"
         className="relative overflow-hidden pb-16 sm:pb-20 lg:pb-24"
       >
-        {/* Atmospheric wash behind the hero. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 opacity-70"
+          className="pointer-events-none absolute inset-0 -z-10"
         >
           <div className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-mist/70 via-ivory to-ivory" />
         </div>
 
         <Container>
-          <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-20">
+          <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-20">
             <div>
               <p className="eyebrow flex items-center gap-3 text-ink/70">
                 <span aria-hidden="true" className="h-px w-8 bg-gold" />
-                Writing &bull; Music &bull; Imagination
+                AI agents &bull; Automation &bull; Data analysis
               </p>
 
-              <h1 className="mt-7 text-balance text-[2.5rem] leading-[1.06] text-ink sm:text-6xl lg:text-[4.25rem]">
+              <h1 className="mt-7 text-balance text-[2.5rem] leading-[1.06] text-ink sm:text-6xl lg:text-[4rem]">
                 {brand.tagline}
               </h1>
 
@@ -55,26 +54,22 @@ export default function HomePage() {
               </p>
 
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <Link
-                  href="/writing"
-                  className={buttonVariants({ size: "lg" })}
-                >
-                  Explore the Writing
+                <Link href="/services" className={buttonVariants({ size: "lg" })}>
+                  See what we build
                   <ArrowRight aria-hidden="true" className="size-4" />
                 </Link>
                 <Link
-                  href="/music"
+                  href="/contact"
                   className={buttonVariants({
                     variant: "secondary",
                     size: "lg",
                   })}
                 >
-                  Discover the Music
+                  Start a conversation
                 </Link>
               </div>
             </div>
 
-            {/* Abstract artwork rather than a photograph. */}
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-ink/12 bg-white/40 sm:aspect-[5/4] lg:aspect-square">
               <WindLines />
             </div>
@@ -83,15 +78,44 @@ export default function HomePage() {
       </Section>
 
       {/* ------------------------------------------------------------------ */}
-      {/*  Introduction                                                      */}
+      {/*  What we build                                                     */}
       {/* ------------------------------------------------------------------ */}
       <Section>
         <Container>
-          <div className="grid gap-10 border-t border-ink/10 pt-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
-            <SectionHeading eyebrow="Introduction" title="Meet Bianca Wind" />
+          <div className="border-t border-ink/10 pt-14">
+            <SectionHeading
+              eyebrow="What we build"
+              title="Four kinds of work"
+              description="Most projects start as one of these, and often end up drawing on more than one."
+            />
+
+            <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {featured.map((capability) => (
+                <li key={capability.id} className="h-full">
+                  <CapabilityCard
+                    capability={capability}
+                    href={`/services#${capability.id}` as Route}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Container>
+      </Section>
+
+      {/* ------------------------------------------------------------------ */}
+      {/*  Approach                                                          */}
+      {/* ------------------------------------------------------------------ */}
+      <Section className="bg-mist/35">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
+            <SectionHeading
+              eyebrow="Our approach"
+              title="Start from the work, not the technology"
+            />
 
             <div className="flex flex-col gap-5">
-              {author.intro.map((paragraph) => (
+              {company.intro.map((paragraph) => (
                 <p
                   key={paragraph.slice(0, 32)}
                   className="text-[1.0625rem] leading-relaxed text-ink/75"
@@ -107,7 +131,7 @@ export default function HomePage() {
                   "mt-2 self-start text-sm",
                 )}
               >
-                More about Bianca Wind
+                How we work
                 <ArrowRight aria-hidden="true" className="size-4" />
               </Link>
             </div>
@@ -116,118 +140,58 @@ export default function HomePage() {
       </Section>
 
       {/* ------------------------------------------------------------------ */}
-      {/*  Featured writing                                                  */}
-      {/* ------------------------------------------------------------------ */}
-      {featuredWriting ? (
-        <Section className="bg-mist/35 py-20 sm:py-24">
-          <Container>
-            <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)] lg:gap-20">
-              <figure className="mx-auto w-full max-w-[17rem] lg:mx-0">
-                <ConceptCover
-                  title={featuredWriting.title}
-                  overline="Working title"
-                />
-                <figcaption className="mt-4 text-center text-xs leading-relaxed text-ink/70 lg:text-left">
-                  Concept artwork. Not a final cover design.
-                </figcaption>
-              </figure>
-
-              <div>
-                <SectionHeading
-                  eyebrow="Featured writing"
-                  title={featuredWriting.title}
-                />
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  <Tag dot>{featuredWriting.statusLabel}</Tag>
-                  {featuredWriting.titleStatus === "working" ? (
-                    <Tag variant="outline">Working title</Tag>
-                  ) : null}
-                </div>
-
-                <p className="mt-7 max-w-xl text-[1.0625rem] leading-relaxed text-ink/75">
-                  A project in progress. There is no synopsis to share yet
-                  &mdash; details will appear here as the work takes shape.
-                </p>
-
-                <Link
-                  href="/writing"
-                  className={cn(buttonVariants({ variant: "secondary" }), "mt-9")}
-                >
-                  See the writing
-                  <ArrowRight aria-hidden="true" className="size-4" />
-                </Link>
-              </div>
-            </div>
-          </Container>
-        </Section>
-      ) : null}
-
-      {/* ------------------------------------------------------------------ */}
-      {/*  Featured music                                                    */}
+      {/*  Process                                                           */}
       {/* ------------------------------------------------------------------ */}
       <Section>
         <Container>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
-            <SectionHeading
-              eyebrow="Featured music"
-              title="Writing that becomes sound"
-              description="Some of Bianca's writing and personal experiences are turned into songs, made with AI music tools."
-            />
+          <SectionHeading
+            eyebrow="How a project runs"
+            title="Small steps, in the open"
+          />
 
-            {featuredTrack ? (
-              <div className="relative overflow-hidden rounded-lg border border-ink/12 bg-white/45">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 top-0 h-24 opacity-60"
-                >
-                  <WindLines variant="band" />
-                </div>
+          <ol className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {processSteps.map((step, index) => (
+              <li key={step.id} className="border-t border-ink/15 pt-5">
+                <span className="eyebrow text-ink/70">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-3 font-serif text-xl text-ink">{step.name}</h3>
+                <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink/75">
+                  {step.body}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </Section>
 
-                <div className="relative p-7 sm:p-9">
-                  <div className="flex flex-wrap gap-2">
-                    <Tag dot>{featuredTrack.platform}</Tag>
-                    {featuredTrack.titleStatus === "working" ? (
-                      <Tag variant="outline">Title to be confirmed</Tag>
-                    ) : null}
-                  </div>
+      {/* ------------------------------------------------------------------ */}
+      {/*  Who we build for                                                  */}
+      {/* ------------------------------------------------------------------ */}
+      <Section spacing="tight">
+        <Container>
+          <div className="border-t border-ink/10 pt-14">
+            <SectionHeading eyebrow="Who we build for" title="Individuals and businesses" />
 
-                  <h3 className="mt-6 font-serif text-3xl leading-tight text-ink">
-                    {featuredTrack.displayTitle}
+            <div className="mt-10 grid gap-10 sm:grid-cols-2 sm:gap-16">
+              {audiences.map((audience) => (
+                <div key={audience.id}>
+                  <h3 className="flex items-center gap-3 font-serif text-2xl text-ink">
+                    <span aria-hidden="true" className="h-px w-6 bg-gold" />
+                    {audience.name}
                   </h3>
-
-                  <p className="mt-4 max-w-md text-[0.9375rem] leading-relaxed text-ink/70">
-                    Listening opens {featuredTrack.platform} in a new tab.
-                    Nothing plays automatically here.
+                  <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink/75">
+                    {audience.body}
                   </p>
-
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <a
-                      href={featuredTrack.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={buttonVariants()}
-                    >
-                      Listen on {featuredTrack.platform}
-                      <ExternalLink aria-hidden="true" className="size-4" />
-                      <span className="sr-only">(opens in a new tab)</span>
-                    </a>
-                    <Link
-                      href="/music"
-                      className={buttonVariants({ variant: "secondary" })}
-                    >
-                      All music
-                    </Link>
-                  </div>
                 </div>
-              </div>
-            ) : null}
+              ))}
+            </div>
           </div>
         </Container>
       </Section>
 
       {/* ------------------------------------------------------------------ */}
-      {/*  Contact invitation                                                */}
+      {/*  Contact                                                           */}
       {/* ------------------------------------------------------------------ */}
       <Section spacing="tight">
         <Container>

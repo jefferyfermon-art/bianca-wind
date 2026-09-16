@@ -10,8 +10,17 @@ import type { Route } from "next";
  *    field `null` rather than inventing a placeholder.
  * 2. Everything inside an `internal` block is for the site owner only. It is
  *    never rendered. Use it for notes, open questions, and verification state.
- * 3. `id` values are stable. They are used as React keys and anchors, so rename
- *    titles freely but do not change an existing id.
+ * 3. `id` values are stable. They are used as React keys and as anchor targets
+ *    (e.g. /services#ai-agents), so rename titles freely but keep the ids.
+ *
+ * THINGS THIS SITE DELIBERATELY DOES NOT CLAIM
+ * --------------------------------------------
+ * No client names or logos, no testimonials, no case studies, no customer or
+ * revenue numbers, no performance statistics, no pricing, no team biographies
+ * or credentials, no funding, no certifications, no delivery timelines, and no
+ * response-time or uptime promises. This is an early-stage company; the site
+ * describes what it builds and how it works, not results it has not yet earned.
+ * Add any of the above only once it is true and verifiable.
  */
 
 /* -------------------------------------------------------------------------- */
@@ -23,9 +32,6 @@ export type NavItem = {
   href: Route;
 };
 
-/** Whether a title is final, or a placeholder still under consideration. */
-export type TitleStatus = "working" | "confirmed";
-
 /** Owner-only metadata. Never rendered to visitors. */
 export type InternalNotes = {
   /** Free-form notes, open questions, and to-dos for the site owner. */
@@ -34,31 +40,36 @@ export type InternalNotes = {
   verified: boolean;
 };
 
-export type WritingProject = {
+/** Icon key, mapped to a lucide icon in `src/components/capability-icon.tsx`. */
+export type IconKey = "agent" | "automation" | "analysis" | "custom";
+
+export type Capability = {
   id: string;
-  title: string;
-  titleStatus: TitleStatus;
-  /** Short public status, e.g. "Work in progress". */
-  statusLabel: string;
+  name: string;
+  icon: IconKey;
+  /** One line, used on cards and in the nav summary. */
+  summary: string;
+  /** Longer explanation, used on the services page. */
+  body: string[];
   /**
-   * Public description. Intentionally `null` until the owner writes one --
-   * never auto-fill this with an invented synopsis.
+   * Illustrative applications. These are examples of what could be built, not
+   * descriptions of delivered work, and the page labels them that way.
    */
-  summary: string | null;
+  examples: string[];
   featured: boolean;
   internal: InternalNotes;
 };
 
-export type MusicTrack = {
+export type Audience = {
   id: string;
-  /** The label shown to visitors. May be a temporary placeholder. */
-  displayTitle: string;
-  titleStatus: TitleStatus;
-  /** Where the track can be listened to, e.g. "Suno". */
-  platform: string;
-  url: string;
-  featured: boolean;
-  internal: InternalNotes;
+  name: string;
+  body: string;
+};
+
+export type ProcessStep = {
+  id: string;
+  name: string;
+  body: string;
 };
 
 export type SocialLink = {
@@ -73,14 +84,17 @@ export type SocialLink = {
 
 export const brand = {
   name: "Bianca Wind",
-  tagline: "Stories, sound, and worlds in motion.",
+  tagline: "AI software, built to fit the way you work.",
   /**
    * Canonical production URL. Leave `null` until a custom domain is live; the
    * app falls back to the Vercel deployment URL. See `src/lib/site-url.ts`.
    */
   url: null as string | null,
   description:
-    "Explore the writing and music of Bianca Wind—a creative space where personal experiences and imagination take shape.",
+    "Bianca Wind develops AI software — agents, automation tools, data analysis tools, and custom AI solutions for individuals and businesses.",
+  /** Short descriptor used in the footer and on cards. */
+  shortDescription:
+    "AI agents, automation, data analysis, and custom AI solutions.",
 } as const;
 
 /* -------------------------------------------------------------------------- */
@@ -89,9 +103,8 @@ export const brand = {
 
 export const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
+  { label: "What we build", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "Writing", href: "/writing" },
-  { label: "Music", href: "/music" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -101,74 +114,181 @@ export const footerNav: NavItem[] = [
 ];
 
 /* -------------------------------------------------------------------------- */
-/*  Author                                                                     */
+/*  Company                                                                    */
 /* -------------------------------------------------------------------------- */
 
-export const author = {
-  /** One-line answer to "who is this?". */
+export const company = {
+  /** One-line answer to "what is this?". */
   short:
-    "Bianca Wind is an author name — a single place for writing, music, and the projects still taking shape.",
+    "Bianca Wind develops artificial intelligence software — AI agents, automation tools, data analysis tools, and custom solutions built around the way a person or a team already works.",
+
   /** Home page introduction. */
   intro: [
-    "Bianca Wind is a creative identity rather than a company or a catalogue. It gathers two kinds of work in one place: stories written from imagination and from lived experience, and songs made from some of that same writing.",
-    "This site is the home for both. It is early, and it is meant to grow in public — work appears here as it becomes real, not before.",
+    "Most software asks people to change how they work in order to use it. We start from the opposite end: look closely at the work that already happens, then build the thing that removes the friction from it.",
+    "That might be an agent that handles a multi-step task end to end, a quiet automation that clears out repetitive admin, a tool that answers questions about data you already hold, or something designed from scratch because nothing off the shelf fits.",
   ],
+
   /** About page. */
   about: [
-    "Bianca Wind began as a name to write under. Writing came first: stories, fragments, and pieces drawn from personal experience — some of it invented, some of it remembered, most of it somewhere in between.",
-    "Not all of that writing stays on the page. Certain passages ask to be heard rather than read, and those become songs, shaped with AI music tools. The words and the intent come from the writing; the arrangement is built around them.",
-    "Wind is the image the name keeps returning to — movement, weather, and atmosphere as ways of describing how stories arrive and change shape. It is a metaphor for the work, and the reason this site looks the way it does.",
-    "What you will find here is a working archive rather than a finished body of work: a place to follow projects while they are still in motion.",
+    "Bianca Wind is a software company working on applied artificial intelligence: agents, automation, data analysis, and custom systems for individuals and for businesses.",
+    "The interesting problem in AI right now is rarely the model. It is the fit — the gap between what a capable general system can do and what a specific person or team actually needs on a Tuesday afternoon. Closing that gap is engineering work: understanding a process properly, choosing where automation genuinely helps, and building something people will still want to use in three months.",
+    "We work in small, narrow steps for that reason. A prototype aimed at one real task tells you more than a long specification, and it tells you sooner — including when the honest answer is that a simpler tool, or no tool at all, would serve better.",
   ],
+
+  /** Deliberately honest positioning. Shown on the About page. */
+  stage: {
+    heading: "Where we are",
+    body: [
+      "Bianca Wind is early. There is no client list, no case-study library, and no pricing table on this site, because publishing those before they are real would tell you nothing useful.",
+      "What we can do is talk concretely about a problem you have, and be straight about whether it is one we are well placed to solve. If it is not, saying so early is more valuable to you than a proposal.",
+    ],
+  },
 } as const;
 
 /* -------------------------------------------------------------------------- */
-/*  Writing                                                                    */
+/*  What we build                                                              */
 /* -------------------------------------------------------------------------- */
 
-export const writingIntro = [
-  "Writing is where every project here starts. Some of it stays prose, and some of it becomes something to listen to.",
-  "Projects are listed below as they take shape. Titles and descriptions may change while a project is still in progress.",
-] as const;
+/**
+ * Shown once on the services page, above the capability sections, so the
+ * illustrative nature of the examples is stated plainly and up front.
+ */
+export const capabilitiesNote =
+  "The examples under each heading show the kind of thing a project might involve. They are there to make the categories concrete — not a portfolio of delivered work.";
 
-export const writingProjects: WritingProject[] = [
+export const capabilities: Capability[] = [
   {
-    id: "book-of-zantranite",
-    title: "The Book of Zantranite",
-    titleStatus: "working",
-    statusLabel: "Work in progress",
-    summary: null,
+    id: "ai-agents",
+    name: "AI agents",
+    icon: "agent",
+    summary:
+      "Software that carries out multi-step work on your behalf, not just one prompt at a time.",
+    body: [
+      "An agent is software that can take an objective, work out the steps, use the tools it has been given, and keep going until the job is done — checking its own work along the way.",
+      "The engineering that matters here is scope and safety: deciding exactly what an agent is allowed to touch, what it must hand back to a person, and how you can see what it did and why.",
+    ],
+    examples: [
+      "Reading an inbox and drafting replies for a person to approve",
+      "Researching a topic across sources and returning a referenced summary",
+      "Working through a queue of tickets, resolving the routine ones",
+      "Preparing a recurring report by gathering the inputs itself",
+    ],
     featured: true,
     internal: {
       notes:
-        "Working title only. No public synopsis yet -- add one here when Bianca is ready to describe the project in her own words. The cover shown on the site is typographic concept artwork, not a final cover.",
+        "Examples are illustrative and labelled as such on the services page. Replace with real delivered work once there is some, and move them under a case-studies section rather than listing them as capabilities.",
+      verified: false,
+    },
+  },
+  {
+    id: "automation",
+    name: "Automation tools",
+    icon: "automation",
+    summary:
+      "Quietly removing the repetitive, rule-shaped work that eats the day.",
+    body: [
+      "Not everything needs a model behind it. A lot of lost time is ordinary repetition: moving information between systems, reformatting it, chasing it, and doing the same checks every week.",
+      "Automation here means finding those loops and closing them — using AI only where judgement is genuinely required, and plain deterministic code everywhere else, because it is cheaper and more predictable.",
+    ],
+    examples: [
+      "Moving data between tools that do not talk to each other",
+      "Turning documents and forms into structured records",
+      "Routing incoming requests to the right person automatically",
+      "Scheduled jobs that produce and distribute routine outputs",
+    ],
+    featured: true,
+    internal: {
+      notes: "Illustrative examples only — see note on ai-agents.",
+      verified: false,
+    },
+  },
+  {
+    id: "data-analysis",
+    name: "Data analysis tools",
+    icon: "analysis",
+    summary:
+      "Getting real answers out of the records you already hold.",
+    body: [
+      "Most organisations are already sitting on the data needed to answer their own questions. What is missing is a way to ask — without exporting three spreadsheets and rebuilding the same pivot table every month.",
+      "We build the layer that sits on top: tools that read your existing records, answer questions in plain language, and produce the summaries and reports you would otherwise assemble by hand.",
+    ],
+    examples: [
+      "Asking questions of your own records in plain language",
+      "Dashboards and recurring reports that build themselves",
+      "Finding patterns and outliers across records too numerous to read",
+      "Turning unstructured notes and documents into analysable data",
+    ],
+    featured: true,
+    internal: {
+      notes: "Illustrative examples only — see note on ai-agents.",
+      verified: false,
+    },
+  },
+  {
+    id: "custom-solutions",
+    name: "Custom AI solutions",
+    icon: "custom",
+    summary:
+      "When nothing off the shelf fits the shape of the problem.",
+    body: [
+      "Sometimes the honest answer is that no existing product matches how you work, and bending your process to fit one costs more than it saves.",
+      "In that case we design around the constraints that actually apply: your data, your privacy and compliance requirements, the systems you already run, and the people who will use the result every day.",
+    ],
+    examples: [
+      "Internal tools shaped around one team's specific process",
+      "AI features built into a product you already operate",
+      "Systems with strict constraints on where data may go",
+      "Bringing an existing prototype up to something dependable",
+    ],
+    featured: true,
+    internal: {
+      notes: "Illustrative examples only — see note on ai-agents.",
       verified: false,
     },
   },
 ];
 
 /* -------------------------------------------------------------------------- */
-/*  Music                                                                      */
+/*  Who we build for                                                           */
 /* -------------------------------------------------------------------------- */
 
-export const musicIntro = [
-  "Some of the writing here turns into music. A piece of prose or a personal experience becomes lyrics, and a song is built around them using AI music tools.",
-  "The words and the intent are Bianca's; the arrangement and production are made with those tools. Tracks are shared here as they are finished.",
-] as const;
-
-export const musicTracks: MusicTrack[] = [
+export const audiences: Audience[] = [
   {
-    id: "suno-ydiidgju40ixmnqz",
-    displayTitle: "A Song by Bianca Wind",
-    titleStatus: "working",
-    platform: "Suno",
-    url: "https://suno.com/s/YDIIdGjU40IXMnQZ",
-    featured: true,
-    internal: {
-      notes:
-        "Temporary display label supplied for the initial build -- this is not a confirmed official song title. Replace `displayTitle` with the real title and set titleStatus to 'confirmed' once it is known.",
-      verified: false,
-    },
+    id: "individuals",
+    name: "Individuals",
+    body: "Solo professionals, freelancers, and small practices who are doing the work of several people and want some of it handled properly rather than hurriedly.",
+  },
+  {
+    id: "businesses",
+    name: "Businesses",
+    body: "Teams that know exactly which part of their week is being lost to repetition or manual analysis, and want a tool built around that process rather than a platform to migrate into.",
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*  How we work                                                                */
+/* -------------------------------------------------------------------------- */
+
+export const processSteps: ProcessStep[] = [
+  {
+    id: "understand",
+    name: "Understand the work",
+    body: "A conversation about what actually takes the time, and where the current process bends. Often this is enough to establish whether software is the right answer at all.",
+  },
+  {
+    id: "prototype",
+    name: "Prototype narrowly",
+    body: "The smallest useful version, aimed at one real task with real data. Narrow scope means you find out quickly whether it works, rather than at the end.",
+  },
+  {
+    id: "deploy",
+    name: "Put it into real use",
+    body: "Into the hands of the people who will use it, in the systems they already use, with a clear view of what the software is doing and where a person stays in the loop.",
+  },
+  {
+    id: "iterate",
+    name: "Refine or hand over",
+    body: "Adjust it against how it behaves in practice. You should end up owning something maintainable — not something that only works while we are holding it.",
   },
 ];
 
@@ -179,14 +299,21 @@ export const musicTracks: MusicTrack[] = [
 export const contact = {
   heading: "Start a conversation",
   invitation:
-    "If you have a genuine question about the writing or the music, or an idea for a creative collaboration, this is the place to send it.",
+    "Tell us about the work you are trying to make easier. A short description of the problem is more useful than a specification.",
   /**
    * Public contact address. Leave `null` until a real address exists -- do not
    * invent one. When set, it is shown as a mailto link on the contact page.
    */
   email: null as string | null,
   /** Honest expectation setting. Deliberately promises nothing. */
-  note: "Messages are read personally. This is not a paid-services enquiry form, and a reply is not guaranteed.",
+  note: "Enquiries are read by a person. If what you need is outside what we are well placed to build, we will say so rather than take the work.",
+  /** What is genuinely useful to include in a first message. */
+  prompts: [
+    "The task or process you want to improve, in plain terms",
+    "Who does it today, and roughly how often",
+    "Any systems or data it already touches",
+    "Constraints that matter — privacy, budget, timing",
+  ],
 } as const;
 
 /* -------------------------------------------------------------------------- */
@@ -209,10 +336,6 @@ export const legal = {
 /*  Derived helpers                                                            */
 /* -------------------------------------------------------------------------- */
 
-export function getFeaturedWriting(): WritingProject | undefined {
-  return writingProjects.find((project) => project.featured);
-}
-
-export function getFeaturedTrack(): MusicTrack | undefined {
-  return musicTracks.find((track) => track.featured);
+export function getFeaturedCapabilities(): Capability[] {
+  return capabilities.filter((capability) => capability.featured);
 }

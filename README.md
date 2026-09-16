@@ -1,7 +1,8 @@
 # Bianca Wind
 
-The author-and-artist website for Bianca Wind — writing, music, and future
-creative projects under one name.
+Company website for Bianca Wind — artificial intelligence software: AI agents,
+automation tools, data analysis tools, and custom AI solutions for individuals
+and businesses.
 
 Built with Next.js (App Router), TypeScript, and Tailwind CSS, and deployed on
 Vercel.
@@ -21,32 +22,50 @@ npm start       # serve the production build
 npx eslint .    # lint
 ```
 
+## Pages
+
+| Route       | Purpose                                                           |
+| ----------- | ----------------------------------------------------------------- |
+| `/`         | Positioning, the four capabilities, how a project runs, who it's for |
+| `/services` | Each capability in depth, with anchors (`/services#ai-agents`)    |
+| `/about`    | What the company is, how it works, and an honest stage statement  |
+| `/contact`  | Enquiry form (see below) and what's useful to include             |
+| `/privacy`  | What the website does and does not collect                        |
+
 ## Editing the content
 
 **Almost everything you will want to change lives in one file:
 [`src/content/site.ts`](src/content/site.ts).** Brand name and tagline,
-navigation, the About text, writing projects, music tracks, social links, and
-the contact address are all defined there, and the pages read from it.
+navigation, company copy, the four capabilities, audiences, process steps,
+social links, and the contact address are all defined there, and the pages read
+from it.
 
 Three rules that keep the site honest:
 
-1. **Public fields are rendered; `internal` blocks are not.** Every project and
-   track has an `internal` object for private notes and a `verified` flag. It
-   is never shown to visitors — use it freely for reminders and open questions.
-2. **Leave a field `null` rather than inventing something.** A writing project
-   with `summary: null` renders a short "no synopsis yet" line instead of
-   invented copy. The same applies to `contact.email` and `brand.url`.
-3. **`id` values are stable.** They are used as React keys. Rename a title
-   whenever you like, but keep the id.
+1. **Public fields are rendered; `internal` blocks are not.** Every capability
+   has an `internal` object for private notes and a `verified` flag. It is never
+   shown to visitors — use it freely for reminders and open questions.
+2. **Leave a field `null` rather than inventing something.** That applies to
+   `contact.email` and `brand.url`.
+3. **`id` values are stable.** They are React keys *and* anchor targets, so
+   `/services#ai-agents` breaks if you rename an id. Rename the `name` freely.
 
-Titles that are not final carry `titleStatus: "working"`, which is what makes
-the "Working title" / "Title to be confirmed" tags appear.
+### What this site deliberately does not claim
 
-### Things deliberately not on the site
+No client names or logos, no testimonials, no case studies, no customer or
+revenue numbers, no performance statistics, no pricing, no team biographies or
+credentials, no funding, no certifications, no delivery timelines, and no
+response-time or uptime promises.
 
-There are no books listed as published, no sales figures, no testimonials, no
-press logos, no newsletter signup, and no shop. There are no social links yet —
-add real ones to `socialLinks` in `site.ts` and the footer will render them.
+This is a young company, and a site that claims otherwise is both dishonest and
+easy to see through. The `examples` on each capability are explicitly labelled
+as illustrations of what a project *could* involve — on the page itself, not
+just in a comment. **When real work exists, do not quietly upgrade those
+examples into implied case studies.** Add a proper section for them, with the
+client's permission.
+
+The header at the top of `site.ts` restates all of this, so it stays visible to
+whoever edits the file next.
 
 ## Turning on the contact form
 
@@ -60,7 +79,7 @@ in the Vercel project settings for deployments:
 | Variable         | Meaning                                              |
 | ---------------- | ---------------------------------------------------- |
 | `RESEND_API_KEY` | API key from [resend.com](https://resend.com)        |
-| `CONTACT_INBOX`  | Address that receives messages                       |
+| `CONTACT_INBOX`  | Address that receives enquiries                      |
 | `CONTACT_FROM`   | Verified sender, e.g. `Bianca Wind <hi@example.com>` |
 
 With all three set, the form renders and submits through a server action
@@ -96,14 +115,14 @@ src/
   app/
     layout.tsx          root layout, fonts, metadata, header/footer
     page.tsx            home
-    about|writing|music|contact|privacy/
+    services|about|contact|privacy/
     contact/actions.ts  contact form server action
     sitemap.ts robots.ts icon.svg
   components/
     site-header.tsx site-footer.tsx page-header.tsx
-    section-heading.tsx content-card.tsx
+    section-heading.tsx capability-card.tsx capability-icon.tsx
     nav/     desktop and mobile navigation
-    art/     wind-lines.tsx, concept-cover.tsx  (hand-drawn SVG, no images)
+    art/     wind-lines.tsx  (hand-drawn SVG, no images)
     ui/      button, card, tag, container, section
   content/site.ts       all editable copy
   lib/                  cn(), site URL, contact config, active-route matching
@@ -122,24 +141,39 @@ of [`src/app/globals.css`](src/app/globals.css).
   3.04:1 on ivory it would fail contrast requirements.
 - Body text sits at `ink/70` or darker, which clears WCAG AA (4.5:1) on both
   ivory and mist.
-- The wind artwork is inline SVG, drawn in `art/wind-lines.tsx`. Its drift
-  animation is disabled under `prefers-reduced-motion`.
-- There is no author portrait and no stock photography anywhere on the site.
+- The artwork is inline SVG, drawn in `art/wind-lines.tsx`. Its drift animation
+  is disabled under `prefers-reduced-motion`.
+- No stock photography anywhere on the site.
 
-### Adding a new writing project
+Overriding a button's colours? Go through `cn()`:
+`cn(buttonVariants({ variant: "inverse" }), "mt-9")`. Passing `className` inside
+`buttonVariants({ … })` concatenates rather than merges, which leaves two
+conflicting Tailwind colour classes on the element and lets source order pick
+the winner.
 
-Append to `writingProjects` in `src/content/site.ts`:
+### Adding a capability
+
+Append to `capabilities` in `src/content/site.ts`:
 
 ```ts
 {
   id: "a-stable-id",
-  title: "The Title",
-  titleStatus: "working",        // or "confirmed"
-  statusLabel: "Work in progress",
-  summary: null,                 // real copy, or null
-  featured: false,               // true puts it on the home page
+  name: "The name",
+  icon: "agent",                 // agent | automation | analysis | custom
+  summary: "One line.",
+  body: ["A paragraph.", "Another."],
+  examples: ["Illustrative application"],
+  featured: true,                // true also shows it on the home page
   internal: { notes: "", verified: false },
 }
 ```
 
-It appears on `/writing` immediately, with a generated concept cover.
+It appears on `/services` with its own anchor, and in the home page grid. To add
+a new `icon` key, extend `IconKey` in `site.ts` and the map in
+`src/components/capability-icon.tsx` — TypeScript will flag the missing entry.
+
+## Branches
+
+- `business-site` — this site
+- `author-site` — an earlier author/artist version of this project, kept for
+  reference
