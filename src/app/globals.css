@@ -91,6 +91,55 @@
     text-transform: uppercase;
   }
 
+  /* Standard body measure. Kept as a utility so the reading size can be
+     adjusted in one place rather than across every page. */
+  .body-copy {
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .body-copy-sm {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  /* Soft off-centre colour wash. Three wide radial gradients rather than an
+     image, so it costs nothing to download and scales to any viewport. */
+  .aurora {
+    background-image:
+      radial-gradient(
+        60% 55% at 12% 18%,
+        color-mix(in srgb, var(--color-teal) 20%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        50% 45% at 88% 8%,
+        color-mix(in srgb, var(--color-gold) 16%, transparent),
+        transparent 72%
+      ),
+      radial-gradient(
+        70% 60% at 65% 85%,
+        color-mix(in srgb, var(--color-mist) 85%, transparent),
+        transparent 75%
+      );
+  }
+
+  /* Fine engineering grid, used behind interface illustrations. */
+  .grid-rule {
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--color-ink) 7%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--color-ink) 7%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 28px 28px;
+  }
+
   /* A hairline rule that fades out — used to close sections. */
   .rule-fade {
     background-image: linear-gradient(

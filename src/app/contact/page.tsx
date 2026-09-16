@@ -41,7 +41,7 @@ export default function ContactPage() {
                 {contact.prompts.map((prompt) => (
                   <li
                     key={prompt}
-                    className="flex items-start gap-3 text-[1.0625rem] leading-relaxed text-ink/75"
+                    className="flex items-start gap-3 body-copy text-ink/75"
                   >
                     <span
                       aria-hidden="true"
@@ -63,7 +63,7 @@ export default function ContactPage() {
               ) : email ? (
                 <div className="rounded-lg border border-ink/15 bg-white/50 p-8">
                   <h2 className="font-serif text-2xl text-ink">By email</h2>
-                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink/75">
+                  <p className="mt-3 body-copy-sm text-ink/75">
                     Enquiries go straight to {brand.name}.
                   </p>
                   <a
@@ -79,12 +79,12 @@ export default function ContactPage() {
                   <h2 className="font-serif text-2xl text-ink">
                     Not open just yet
                   </h2>
-                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink/75">
+                  <p className="mt-4 body-copy-sm text-ink/75">
                     There is no enquiry address to publish here yet, and we
                     would rather leave this blank than print one that does not
                     reach anybody.
                   </p>
-                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink/75">
+                  <p className="mt-4 body-copy-sm text-ink/75">
                     Until it opens, the clearest picture of what we build and
                     how a project runs is on these two pages.
                   </p>

@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 import { CapabilityIcon } from "@/components/capability-icon";
+import { CapabilityVisual } from "@/components/capability-visual";
 import { PageHeader } from "@/components/page-header";
 import { buttonVariants } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -64,9 +65,14 @@ export default function ServicesPage() {
                     <h2 className="mt-6 font-serif text-3xl leading-tight text-ink sm:text-4xl">
                       {capability.name}
                     </h2>
-                    <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink/75">
+                    <p className="mt-4 body-copy text-ink/75">
                       {capability.summary}
                     </p>
+
+                    <CapabilityVisual
+                      icon={capability.icon}
+                      className="mt-8"
+                    />
                   </div>
 
                   <div>
@@ -74,7 +80,7 @@ export default function ServicesPage() {
                       {capability.body.map((paragraph) => (
                         <p
                           key={paragraph.slice(0, 32)}
-                          className="text-[1.0625rem] leading-[1.75] text-ink/80"
+                          className="body-copy text-ink/80"
                         >
                           {paragraph}
                         </p>
@@ -91,7 +97,7 @@ export default function ServicesPage() {
                         {capability.examples.map((example) => (
                           <li
                             key={example}
-                            className="flex items-start gap-3 text-[0.9375rem] leading-relaxed text-ink/75"
+                            className="flex items-start gap-3 body-copy-sm text-ink/75"
                           >
                             <span
                               aria-hidden="true"
@@ -129,8 +135,8 @@ export default function ServicesPage() {
                 <span className="eyebrow text-ink/70">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 font-serif text-xl text-ink">{step.name}</h3>
-                <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink/75">
+                <h3 className="mt-3 font-serif text-2xl text-ink">{step.name}</h3>
+                <p className="mt-3 body-copy-sm text-ink/75">
                   {step.body}
                 </p>
               </li>

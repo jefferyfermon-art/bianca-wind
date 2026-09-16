@@ -154,7 +154,7 @@ export const company = {
  * illustrative nature of the examples is stated plainly and up front.
  */
 export const capabilitiesNote =
-  "The examples under each heading show the kind of thing a project might involve. They are there to make the categories concrete — not a portfolio of delivered work.";
+  "The interfaces and examples on this page are drawn by hand to make each category concrete. They illustrate the kind of thing a project might involve — they are not product screenshots, and not a portfolio of delivered work.";
 
 export const capabilities: Capability[] = [
   {
@@ -331,6 +331,87 @@ export const legal = {
   /** Update whenever the privacy page text changes. */
   privacyLastUpdated: "15 September 2026",
 } as const;
+
+/* -------------------------------------------------------------------------- */
+/*  Principles                                                                 */
+/* -------------------------------------------------------------------------- */
+
+export type Principle = {
+  id: string;
+  name: string;
+  body: string;
+};
+
+export const principles: Principle[] = [
+  {
+    id: "narrow-scope",
+    name: "Narrow beats broad",
+    body: "One task done properly is worth more than a platform that half-covers ten. Scope stays small until something is genuinely working.",
+  },
+  {
+    id: "human-in-the-loop",
+    name: "A person stays in the loop",
+    body: "Automation should be visible and reversible. You decide what runs on its own and what waits for someone to approve it.",
+  },
+  {
+    id: "you-own-it",
+    name: "You own the result",
+    body: "No lock-in by obscurity. The system should be documented and maintainable by someone other than the person who built it.",
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*  Questions                                                                  */
+/* -------------------------------------------------------------------------- */
+
+export type Faq = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+/**
+ * Honest answers only. Nothing here should promise a price, a timeline, or a
+ * result that has not been agreed.
+ */
+export const faqs: Faq[] = [
+  {
+    id: "know-what-i-want",
+    question: "Do I need to know what I want built?",
+    answer:
+      "No. A description of the problem is a better starting point than a specification. Most of the first conversation is working out what the actual bottleneck is, which is not always where people expect it to be.",
+  },
+  {
+    id: "too-small",
+    question: "Is my project too small?",
+    answer:
+      "Small, well-defined problems are the ones automation tends to solve best. If something is genuinely too small to be worth building, we will say so rather than pad it out.",
+  },
+  {
+    id: "not-ai",
+    question: "What if AI is not the right answer?",
+    answer:
+      "Then we will tell you. Plenty of time-consuming work is better fixed with ordinary software, a changed process, or a setting in a tool you already pay for. Recommending that costs us a project and saves you one.",
+  },
+  {
+    id: "our-data",
+    question: "What happens to our data?",
+    answer:
+      "How data is accessed, stored, and deleted is agreed in writing before any work starts, and it is shaped by your constraints rather than ours. Nothing on this website collects it — see the privacy page.",
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*  Illustrations                                                              */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Shown beneath the interface illustrations. They are drawn by hand to explain
+ * an idea; they are not screenshots of a shipped product, and must not be
+ * presented as though they were.
+ */
+export const illustrationCaption =
+  "Illustrative interfaces, drawn to explain the idea — not product screenshots.";
 
 /* -------------------------------------------------------------------------- */
 /*  Derived helpers                                                            */

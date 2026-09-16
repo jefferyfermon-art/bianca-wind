@@ -30,7 +30,7 @@ export default function AboutPage() {
               {company.about.map((paragraph) => (
                 <p
                   key={paragraph.slice(0, 32)}
-                  className="text-[1.0625rem] leading-[1.75] text-ink/80"
+                  className="body-copy text-ink/80"
                 >
                   {paragraph}
                 </p>
@@ -57,7 +57,7 @@ export default function AboutPage() {
                   </span>
                   <div className="max-w-2xl">
                     <h3 className="font-serif text-xl text-ink">{step.name}</h3>
-                    <p className="mt-2 text-[1.0625rem] leading-relaxed text-ink/75">
+                    <p className="mt-2 body-copy text-ink/75">
                       {step.body}
                     </p>
                   </div>
@@ -81,7 +81,7 @@ export default function AboutPage() {
                     <span aria-hidden="true" className="h-px w-6 bg-gold" />
                     {audience.name}
                   </h3>
-                  <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink/75">
+                  <p className="mt-4 body-copy text-ink/75">
                     {audience.body}
                   </p>
                 </div>
@@ -101,7 +101,7 @@ export default function AboutPage() {
                 {company.stage.body.map((paragraph) => (
                   <p
                     key={paragraph.slice(0, 32)}
-                    className="text-[1.0625rem] leading-relaxed text-ink/80"
+                    className="body-copy text-ink/80"
                   >
                     {paragraph}
                   </p>
