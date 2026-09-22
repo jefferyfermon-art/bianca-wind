@@ -122,8 +122,10 @@ src/
     site-header.tsx site-footer.tsx page-header.tsx
     section-heading.tsx capability-card.tsx capability-icon.tsx
     nav/     desktop and mobile navigation
-    art/     wind-lines.tsx  (hand-drawn SVG, no images)
+    art/     wind-lines.tsx, interface panels (hand-drawn SVG and markup)
+    image-band.tsx        full-bleed photographic band
     ui/      button, card, tag, container, section
+  assets/images/        photography + CREDITS.md
   content/site.ts       all editable copy
   lib/                  cn(), site URL, contact config, active-route matching
 ```
@@ -143,7 +145,18 @@ of [`src/app/globals.css`](src/app/globals.css).
   ivory and mist.
 - The artwork is inline SVG, drawn in `art/wind-lines.tsx`. Its drift animation
   is disabled under `prefers-reduced-motion`.
-- No stock photography anywhere on the site.
+- Photography lives in `src/assets/images/`, is committed to the repo rather
+  than hot-linked, and is served through `next/image`. Provenance and licence
+  for every file are recorded in
+  [`src/assets/images/CREDITS.md`](src/assets/images/CREDITS.md).
+- The photography is deliberately abstract and atmospheric. No photographs of
+  people presented as staff, no offices presented as premises, no screenshots
+  presented as products.
+
+Text over a photograph needs more contrast than text on flat ivory. The hero
+labels sit at `ink/85` for that reason: at `ink/70` they measured 4.25:1 against
+the darkest part of the background image, under the 4.5:1 AA floor. If you swap
+an image, re-check the text over it rather than assuming.
 
 Overriding a button's colours? Go through `cn()`:
 `cn(buttonVariants({ variant: "inverse" }), "mt-9")`. Passing `className` inside

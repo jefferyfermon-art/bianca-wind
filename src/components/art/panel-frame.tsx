@@ -26,8 +26,8 @@ export function PanelFrame({
     <div
       aria-hidden="true"
       className={cn(
-        "relative overflow-hidden rounded-xl border border-ink/12 bg-white/80",
-        "shadow-[0_24px_60px_-32px_rgba(23,37,42,0.45)] backdrop-blur-[2px]",
+        "glass relative overflow-hidden rounded-xl border border-ink/12",
+        "shadow-[0_24px_60px_-32px_rgba(23,37,42,0.45)]",
         className,
       )}
     >

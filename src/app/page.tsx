@@ -1,11 +1,14 @@
 import { ArrowRight, Plus } from "lucide-react";
 import type { Route } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
+import ridges from "@/assets/images/ridges.jpg";
 import { AgentRun } from "@/components/art/agent-run";
 import { Analysis } from "@/components/art/analysis";
 import { Blocks } from "@/components/art/blocks";
 import { CapabilityIcon } from "@/components/capability-icon";
+import { ImageBand } from "@/components/image-band";
 import { SectionHeading } from "@/components/section-heading";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, cardSurface } from "@/components/ui/card";
@@ -42,9 +45,26 @@ export default function HomePage() {
         spacing="loose"
         className="relative overflow-hidden pb-20 sm:pb-24"
       >
+        {/* Atmospheric photograph, washed back so the type stays dominant. */}
+        <div aria-hidden="true" className="absolute inset-0 -z-20">
+          <Image
+            src={ridges}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            placeholder="blur"
+            className="object-cover opacity-45"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-ivory/30 via-ivory/75 to-ivory" />
+          {/* Keeps the text column light enough for AA contrast, while the
+              photograph stays visible on the right behind the panels. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-ivory/85 via-ivory/45 to-transparent" />
+        </div>
+
         <div
           aria-hidden="true"
-          className="aurora pointer-events-none absolute inset-0 -z-10 opacity-80"
+          className="aurora pointer-events-none absolute inset-0 -z-10 opacity-70"
         />
         <div
           aria-hidden="true"
@@ -54,7 +74,7 @@ export default function HomePage() {
         <Container>
           <div className="grid items-center gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-20">
             <div>
-              <p className="eyebrow flex items-center gap-3 text-ink/70">
+              <p className="eyebrow flex items-center gap-3 text-ink/85">
                 <span aria-hidden="true" className="h-px w-8 bg-gold" />
                 AI agents &bull; Automation &bull; Data analysis
               </p>
@@ -91,7 +111,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <p className="mt-10 text-sm text-ink/70">{illustrationCaption}</p>
+          <p className="mt-10 text-sm text-ink/85">{illustrationCaption}</p>
         </Container>
       </Section>
 
@@ -111,12 +131,12 @@ export default function HomePage() {
               const wide = cellSpans[index] === "lg:col-span-4";
 
               return (
-                <li key={capability.id} className={cn(cellSpans[index])}>
+                <li key={capability.id} className={cn("reveal", cellSpans[index])}>
                   <Link
                     href={`/services#${capability.id}` as Route}
                     className={cn(
                       cardSurface,
-                      "group flex h-full flex-col gap-6 p-6 transition-colors duration-200 hover:border-ink/30 sm:p-7",
+                      "lift group flex h-full flex-col gap-6 p-6 hover:border-ink/30 sm:p-7",
                       wide && "lg:flex-row lg:items-center lg:gap-8",
                     )}
                   >
@@ -153,6 +173,18 @@ export default function HomePage() {
       </Section>
 
       {/* ------------------------------------------------------------------ */}
+      {/*  Statement band                                                    */}
+      {/* ------------------------------------------------------------------ */}
+      <ImageBand image={ridges} height="md" tone="ink" drift>
+        <p className="max-w-3xl text-balance font-serif text-3xl leading-[1.15] text-ivory sm:text-4xl lg:text-5xl">
+          Software should fit the work, not the other way round.
+        </p>
+        <p className="mt-6 max-w-xl body-copy text-ivory/80">
+          {brand.shortDescription}
+        </p>
+      </ImageBand>
+
+      {/* ------------------------------------------------------------------ */}
       {/*  Approach                                                          */}
       {/* ------------------------------------------------------------------ */}
       <Section className="border-y border-ink/10 bg-mist/40">
@@ -185,7 +217,7 @@ export default function HomePage() {
 
           <div className="mt-16 grid gap-4 sm:grid-cols-3">
             {principles.map((principle) => (
-              <Card key={principle.id} className="bg-white/60 p-6">
+              <Card key={principle.id} className="reveal lift bg-white/60 p-6">
                 <h3 className="flex items-start gap-3 font-serif text-xl leading-tight text-ink">
                   <Plus
                     aria-hidden="true"
@@ -289,11 +321,12 @@ export default function HomePage() {
       <Section spacing="tight">
         <Container>
           <div className="relative overflow-hidden rounded-xl border border-ink/12 bg-ink px-7 py-16 text-center sm:px-12 sm:py-20">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 opacity-45"
-            >
-              <div className="grid-rule absolute inset-0 opacity-30" />
+            {/* A photograph was tried here and was invisible: the panel has to
+                stay dark for the ivory text, which buried it. A gradient gives
+                the same depth for no bytes. */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+              <div className="ink-glow absolute inset-0 opacity-70" />
+              <div className="grid-rule absolute inset-0 opacity-15" />
             </div>
 
             <div className="relative mx-auto max-w-2xl">
