@@ -13,7 +13,7 @@ const widths = {
 
 /**
  * Horizontal shell for every section. Owns the page gutters, so nothing else
- * needs to — this is what keeps the layout free of horizontal overflow.
+ * needs to. This is what keeps the layout free of horizontal overflow.
  */
 export function Container({
   className,

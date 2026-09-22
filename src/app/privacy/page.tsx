@@ -101,10 +101,10 @@ export default function PrivacyPage() {
               <section className="flex flex-col gap-4">
                 <h2 className="font-serif text-2xl text-ink">Changes</h2>
                 <p className="body-copy text-ink/80">
-                  If the way this site handles information changes &mdash; for
+                  If the way this site handles information changes, for
                   example if a contact form, an analytics tool, or a newsletter
-                  is added later &mdash; this page will be updated to say so,
-                  and the date at the top will change with it.
+                  is added later, this page will be updated to say so, and the
+                  date at the top will change with it.
                 </p>
               </section>
             </div>

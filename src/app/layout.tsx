@@ -23,8 +23,8 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-    default: `${brand.name} — ${brand.tagline}`,
-    template: `%s — ${brand.name}`,
+    default: `${brand.name}: ${brand.tagline}`,
+    template: `%s | ${brand.name}`,
   },
   description: brand.description,
   applicationName: brand.name,
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: brand.name,
-    title: `${brand.name} — ${brand.tagline}`,
+    title: `${brand.name}: ${brand.tagline}`,
     description: brand.description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${brand.name} — ${brand.tagline}`,
+    title: `${brand.name}: ${brand.tagline}`,
     description: brand.description,
   },
   robots: {

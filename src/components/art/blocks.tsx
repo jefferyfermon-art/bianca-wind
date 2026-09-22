@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Twelve cells; the filled ones trace an irregular shape rather than a neat
- * rectangle — the point being that the system is cut to fit the problem.
+ * rectangle. The point is that the system is cut to fit the problem.
  */
 const filled = new Set([0, 1, 2, 4, 5, 7, 8, 9, 11]);
 const accent = new Set([2, 8]);

@@ -91,7 +91,7 @@ export const brand = {
    */
   url: null as string | null,
   description:
-    "Bianca Wind develops AI software — agents, automation tools, data analysis tools, and custom AI solutions for individuals and businesses.",
+    "Bianca Wind develops AI software: agents, automation tools, data analysis tools, and custom AI solutions for individuals and businesses.",
   /** Short descriptor used in the footer and on cards. */
   shortDescription:
     "AI agents, automation, data analysis, and custom AI solutions.",
@@ -120,7 +120,7 @@ export const footerNav: NavItem[] = [
 export const company = {
   /** One-line answer to "what is this?". */
   short:
-    "Bianca Wind develops artificial intelligence software — AI agents, automation tools, data analysis tools, and custom solutions built around the way a person or a team already works.",
+    "Bianca Wind develops artificial intelligence software: AI agents, automation tools, data analysis tools, and custom solutions built around the way a person or a team already works.",
 
   /** Home page introduction. */
   intro: [
@@ -131,8 +131,8 @@ export const company = {
   /** About page. */
   about: [
     "Bianca Wind is a software company working on applied artificial intelligence: agents, automation, data analysis, and custom systems for individuals and for businesses.",
-    "The interesting problem in AI right now is rarely the model. It is the fit — the gap between what a capable general system can do and what a specific person or team actually needs on a Tuesday afternoon. Closing that gap is engineering work: understanding a process properly, choosing where automation genuinely helps, and building something people will still want to use in three months.",
-    "We work in small, narrow steps for that reason. A prototype aimed at one real task tells you more than a long specification, and it tells you sooner — including when the honest answer is that a simpler tool, or no tool at all, would serve better.",
+    "The interesting problem in AI right now is rarely the model. It is the fit: the gap between what a capable general system can do and what a specific person or team actually needs on a Tuesday afternoon. Closing that gap is engineering work: understanding a process properly, choosing where automation genuinely helps, and building something people will still want to use in three months.",
+    "We work in small, narrow steps for that reason. A prototype aimed at one real task tells you more than a long specification, and it tells you sooner, including when the honest answer is that a simpler tool, or no tool at all, would serve better.",
   ],
 
   /** Deliberately honest positioning. Shown on the About page. */
@@ -154,7 +154,7 @@ export const company = {
  * illustrative nature of the examples is stated plainly and up front.
  */
 export const capabilitiesNote =
-  "The interfaces and examples on this page are drawn by hand to make each category concrete. They illustrate the kind of thing a project might involve — they are not product screenshots, and not a portfolio of delivered work.";
+  "The interfaces and examples on this page are drawn by hand to make each category concrete. They illustrate the kind of thing a project might involve. They are not product screenshots, and not a portfolio of delivered work.";
 
 export const capabilities: Capability[] = [
   {
@@ -164,7 +164,7 @@ export const capabilities: Capability[] = [
     summary:
       "Software that carries out multi-step work on your behalf, not just one prompt at a time.",
     body: [
-      "An agent is software that can take an objective, work out the steps, use the tools it has been given, and keep going until the job is done — checking its own work along the way.",
+      "An agent is software that can take an objective, work out the steps, use the tools it has been given, and keep going until the job is done, checking its own work along the way.",
       "The engineering that matters here is scope and safety: deciding exactly what an agent is allowed to touch, what it must hand back to a person, and how you can see what it did and why.",
     ],
     examples: [
@@ -188,7 +188,7 @@ export const capabilities: Capability[] = [
       "Quietly removing the repetitive, rule-shaped work that eats the day.",
     body: [
       "Not everything needs a model behind it. A lot of lost time is ordinary repetition: moving information between systems, reformatting it, chasing it, and doing the same checks every week.",
-      "Automation here means finding those loops and closing them — using AI only where judgement is genuinely required, and plain deterministic code everywhere else, because it is cheaper and more predictable.",
+      "Automation here means finding those loops and closing them, using AI only where judgement is genuinely required, and plain deterministic code everywhere else, because it is cheaper and more predictable.",
     ],
     examples: [
       "Moving data between tools that do not talk to each other",
@@ -198,7 +198,7 @@ export const capabilities: Capability[] = [
     ],
     featured: true,
     internal: {
-      notes: "Illustrative examples only — see note on ai-agents.",
+      notes: "Illustrative examples only. See note on ai-agents.",
       verified: false,
     },
   },
@@ -209,7 +209,7 @@ export const capabilities: Capability[] = [
     summary:
       "Getting real answers out of the records you already hold.",
     body: [
-      "Most organisations are already sitting on the data needed to answer their own questions. What is missing is a way to ask — without exporting three spreadsheets and rebuilding the same pivot table every month.",
+      "Most organisations are already sitting on the data needed to answer their own questions. What is missing is a way to ask, without exporting three spreadsheets and rebuilding the same pivot table every month.",
       "We build the layer that sits on top: tools that read your existing records, answer questions in plain language, and produce the summaries and reports you would otherwise assemble by hand.",
     ],
     examples: [
@@ -220,7 +220,7 @@ export const capabilities: Capability[] = [
     ],
     featured: true,
     internal: {
-      notes: "Illustrative examples only — see note on ai-agents.",
+      notes: "Illustrative examples only. See note on ai-agents.",
       verified: false,
     },
   },
@@ -242,7 +242,7 @@ export const capabilities: Capability[] = [
     ],
     featured: true,
     internal: {
-      notes: "Illustrative examples only — see note on ai-agents.",
+      notes: "Illustrative examples only. See note on ai-agents.",
       verified: false,
     },
   },
@@ -288,7 +288,7 @@ export const processSteps: ProcessStep[] = [
   {
     id: "iterate",
     name: "Refine or hand over",
-    body: "Adjust it against how it behaves in practice. You should end up owning something maintainable — not something that only works while we are holding it.",
+    body: "Adjust it against how it behaves in practice. You should end up owning something maintainable, not something that only works while we are holding it.",
   },
 ];
 
@@ -312,7 +312,7 @@ export const contact = {
     "The task or process you want to improve, in plain terms",
     "Who does it today, and roughly how often",
     "Any systems or data it already touches",
-    "Constraints that matter — privacy, budget, timing",
+    "Constraints that matter: privacy, budget, timing",
   ],
 } as const;
 
@@ -397,7 +397,7 @@ export const faqs: Faq[] = [
     id: "our-data",
     question: "What happens to our data?",
     answer:
-      "How data is accessed, stored, and deleted is agreed in writing before any work starts, and it is shaped by your constraints rather than ours. Nothing on this website collects it — see the privacy page.",
+      "How data is accessed, stored, and deleted is agreed in writing before any work starts, and it is shaped by your constraints rather than ours. Nothing on this website collects it. See the privacy page.",
   },
 ];
 
@@ -411,7 +411,7 @@ export const faqs: Faq[] = [
  * presented as though they were.
  */
 export const illustrationCaption =
-  "Illustrative interfaces, drawn to explain the idea — not product screenshots.";
+  "Illustrative interfaces, drawn to explain the idea. Not product screenshots.";
 
 /* -------------------------------------------------------------------------- */
 /*  Derived helpers                                                            */

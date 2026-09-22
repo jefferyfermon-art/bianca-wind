@@ -1,8 +1,8 @@
 # Bianca Wind
 
-Company website for Bianca Wind — artificial intelligence software: AI agents,
-automation tools, data analysis tools, and custom AI solutions for individuals
-and businesses.
+Company website for Bianca Wind, a company building artificial intelligence
+software: AI agents, automation tools, data analysis tools, and custom AI
+solutions for individuals and businesses.
 
 Built with Next.js (App Router), TypeScript, and Tailwind CSS, and deployed on
 Vercel.
@@ -44,7 +44,7 @@ Three rules that keep the site honest:
 
 1. **Public fields are rendered; `internal` blocks are not.** Every capability
    has an `internal` object for private notes and a `verified` flag. It is never
-   shown to visitors — use it freely for reminders and open questions.
+   shown to visitors. Use it freely for reminders and open questions.
 2. **Leave a field `null` rather than inventing something.** That applies to
    `contact.email` and `brand.url`.
 3. **`id` values are stable.** They are React keys *and* anchor targets, so
@@ -59,7 +59,7 @@ response-time or uptime promises.
 
 This is a young company, and a site that claims otherwise is both dishonest and
 easy to see through. The `examples` on each capability are explicitly labelled
-as illustrations of what a project *could* involve — on the page itself, not
+as illustrations of what a project *could* involve, on the page itself and not
 just in a comment. **When real work exists, do not quietly upgrade those
 examples into implied case studies.** Add a proper section for them, with the
 client's permission.
@@ -73,7 +73,7 @@ The contact page ships with the form switched **off**, because there is no real
 inbox to send to yet. Visitors see a short, honest note instead of a form that
 goes nowhere.
 
-To switch it on, set three environment variables — locally in `.env.local`, and
+To switch it on, set three environment variables, locally in `.env.local` and
 in the Vercel project settings for deployments:
 
 | Variable         | Meaning                                              |
@@ -85,7 +85,7 @@ in the Vercel project settings for deployments:
 With all three set, the form renders and submits through a server action
 (`src/app/contact/actions.ts`), which validates the input, drops honeypot
 submissions, and emails the message. The privacy page also grows a section
-describing what the form collects — it only claims that when the form is live.
+describing what the form collects. It only claims that when the form is live.
 
 If you would rather publish an email address than run a form, set
 `contact.email` in `site.ts` instead and the page shows a mailto button.
@@ -95,14 +95,14 @@ See `.env.example` for a template.
 ## Deploying to Vercel
 
 Import the repository at [vercel.com/new](https://vercel.com/new). The defaults
-are correct — no build configuration needed.
+are correct, and no build configuration is needed.
 
 Absolute URLs for metadata, `sitemap.xml`, and `robots.txt` resolve in this
 order (see `src/lib/site-url.ts`):
 
-1. `brand.url` in `site.ts` — set this once a custom domain is live
+1. `brand.url` in `site.ts` (set this once a custom domain is live)
 2. `NEXT_PUBLIC_SITE_URL`
-3. `VERCEL_PROJECT_PRODUCTION_URL` — set automatically by Vercel
+3. `VERCEL_PROJECT_PRODUCTION_URL` (set automatically by Vercel)
 4. `http://localhost:3000`
 
 So deployments work with no configuration, and pointing a custom domain at the
@@ -137,7 +137,7 @@ The palette, fonts, paper texture, and motion are defined as tokens at the top
 of [`src/app/globals.css`](src/app/globals.css).
 
 - Ivory `#F7F3EC`, ink `#17252A`, teal `#406B70`, mist `#E5ECE9`, gold `#A88750`
-- Gold is decorative only — rules, dots, frames. It is never used for text: at
+- Gold is decorative only (rules, dots, frames). It is never used for text: at
   3.04:1 on ivory it would fail contrast requirements.
 - Body text sits at `ink/70` or darker, which clears WCAG AA (4.5:1) on both
   ivory and mist.
@@ -170,4 +170,4 @@ Append to `capabilities` in `src/content/site.ts`:
 
 It appears on `/services` with its own anchor, and in the home page grid. To add
 a new `icon` key, extend `IconKey` in `site.ts` and the map in
-`src/components/capability-icon.tsx` — TypeScript will flag the missing entry.
+`src/components/capability-icon.tsx`. TypeScript will flag the missing entry.

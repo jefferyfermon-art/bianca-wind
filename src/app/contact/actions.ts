@@ -34,7 +34,7 @@ export async function submitContactForm(
 
   // Honeypot: real people leave this hidden field empty.
   if (readField(formData, "company")) {
-    return { status: "success", message: "Thank you — your message was sent." };
+    return { status: "success", message: "Thank you. Your message was sent." };
   }
 
   const name = readField(formData, "name");
@@ -102,6 +102,6 @@ export async function submitContactForm(
 
   return {
     status: "success",
-    message: "Thank you — your message was sent.",
+    message: "Thank you. Your message was sent.",
   };
 }

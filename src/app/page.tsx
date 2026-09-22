@@ -96,7 +96,7 @@ export default function HomePage() {
       </Section>
 
       {/* ------------------------------------------------------------------ */}
-      {/*  Capabilities — bento grid                                         */}
+      {/*  Capabilities: bento grid                                          */}
       {/* ------------------------------------------------------------------ */}
       <Section>
         <Container>

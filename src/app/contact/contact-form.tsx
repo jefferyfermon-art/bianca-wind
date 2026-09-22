@@ -123,7 +123,7 @@ export function ContactForm() {
         <FieldError id="message-error">{state.fieldErrors?.message}</FieldError>
       </div>
 
-      {/* Honeypot — hidden from people, tempting to bots. */}
+      {/* Honeypot: hidden from people, tempting to bots. */}
       <div aria-hidden="true" className="hidden">
         <label htmlFor="company">Company</label>
         <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />

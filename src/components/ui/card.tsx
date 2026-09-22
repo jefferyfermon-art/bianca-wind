@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Card surface styles, exported separately so that an element which must be
- * something other than a `div` — a `next/link` anchor, say — can wear the same
+ * something other than a `div` (a `next/link` anchor, say) can wear the same
  * surface without nesting one interactive element inside another.
  */
 export const cardSurface =

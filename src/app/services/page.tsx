@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "What we build",
   description:
-    "AI agents, automation tools, data analysis tools, and custom AI solutions — what each one means in practice.",
+    "AI agents, automation tools, data analysis tools, and custom AI solutions, and what each one means in practice.",
 };
 
 export default function ServicesPage() {
@@ -23,7 +23,7 @@ export default function ServicesPage() {
       <PageHeader
         eyebrow="What we build"
         title="Four kinds of work"
-        description="Most projects start as one of these. In practice they overlap — an agent usually needs automation underneath it, and analysis is often what makes either one worth having."
+        description="Most projects start as one of these. In practice they overlap: an agent usually needs automation underneath it, and analysis is often what makes either one worth having."
       />
 
       {/* Section index, so the page is navigable without scrolling blindly. */}
@@ -88,7 +88,7 @@ export default function ServicesPage() {
                     </div>
 
                     <div className="mt-10 border-t border-ink/10 pt-8">
-                      {/* Clearly labelled as illustrative — these are not
+                      {/* Clearly labelled as illustrative. These are not
                           descriptions of delivered client work. */}
                       <h3 className="eyebrow text-ink/70">
                         What it can look like
@@ -108,7 +108,7 @@ export default function ServicesPage() {
                         ))}
                       </ul>
                       <p className="mt-6 text-sm leading-relaxed text-ink/70">
-                        Illustrations of what this covers &mdash; not a list of
+                        Illustrations of what this covers, not a list of
                         completed projects.
                       </p>
                     </div>

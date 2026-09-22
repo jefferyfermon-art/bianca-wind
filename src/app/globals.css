@@ -140,7 +140,7 @@
     background-size: 28px 28px;
   }
 
-  /* A hairline rule that fades out — used to close sections. */
+  /* A hairline rule that fades out, used to close sections. */
   .rule-fade {
     background-image: linear-gradient(
       to right,

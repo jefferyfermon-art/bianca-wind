@@ -12,7 +12,7 @@ type PanelFrameProps = {
 
 /**
  * Shared chrome for the interface illustrations. These panels are drawn by
- * hand to explain an idea — they are not screenshots of a shipped product, and
+ * hand to explain an idea. They are not screenshots of a shipped product,
  * the surrounding copy says so. Decorative, so hidden from assistive
  * technology; the capability text alongside carries the meaning.
  */
