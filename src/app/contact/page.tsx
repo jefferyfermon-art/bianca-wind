@@ -33,7 +33,7 @@ export default function ContactPage() {
         <Container>
           <div className="grid gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:gap-20">
             <div>
-              <h2 className="font-serif text-2xl text-ink">
+              <h2 className="font-display text-2xl text-fg">
                 Useful things to include
               </h2>
 
@@ -41,7 +41,7 @@ export default function ContactPage() {
                 {contact.prompts.map((prompt) => (
                   <li
                     key={prompt}
-                    className="flex items-start gap-3 body-copy text-ink/75"
+                    className="flex items-start gap-3 body-copy text-fg/75"
                   >
                     <span
                       aria-hidden="true"
@@ -52,7 +52,7 @@ export default function ContactPage() {
                 ))}
               </ul>
 
-              <p className="mt-10 border-t border-ink/10 pt-6 text-sm leading-relaxed text-ink/70">
+              <p className="mt-10 border-t border-fg/10 pt-6 text-sm leading-relaxed text-fg/70">
                 {contact.note}
               </p>
             </div>
@@ -61,9 +61,9 @@ export default function ContactPage() {
               {canSendForm ? (
                 <ContactForm />
               ) : email ? (
-                <div className="rounded-lg border border-ink/15 bg-white/50 p-8">
-                  <h2 className="font-serif text-2xl text-ink">By email</h2>
-                  <p className="mt-3 body-copy-sm text-ink/75">
+                <div className="rounded-xl border border-fg/15 bg-panel/70 p-8">
+                  <h2 className="font-display text-2xl text-fg">By email</h2>
+                  <p className="mt-3 body-copy-sm text-fg/75">
                     Enquiries go straight to {brand.name}.
                   </p>
                   <a
@@ -75,16 +75,16 @@ export default function ContactPage() {
                   </a>
                 </div>
               ) : (
-                <div className="rounded-lg border border-ink/15 bg-mist/45 p-8">
-                  <h2 className="font-serif text-2xl text-ink">
+                <div className="rounded-lg border border-fg/15 bg-panel/45 p-8">
+                  <h2 className="font-display text-2xl text-fg">
                     Not open just yet
                   </h2>
-                  <p className="mt-4 body-copy-sm text-ink/75">
+                  <p className="mt-4 body-copy-sm text-fg/75">
                     There is no enquiry address to publish here yet, and we
                     would rather leave this blank than print one that does not
                     reach anybody.
                   </p>
-                  <p className="mt-4 body-copy-sm text-ink/75">
+                  <p className="mt-4 body-copy-sm text-fg/75">
                     Until it opens, the clearest picture of what we build and
                     how a project runs is on these two pages.
                   </p>

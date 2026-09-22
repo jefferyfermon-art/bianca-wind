@@ -1,8 +1,9 @@
 # Bianca Wind
 
 Company website for Bianca Wind, a company building artificial intelligence
-software: AI agents, automation tools, data analysis tools, and custom AI
-solutions for individuals and businesses.
+software: AI agents, voice agents for music and language training, automation
+tools, data analysis tools, and custom AI solutions for individuals and
+businesses.
 
 Built with Next.js (App Router), TypeScript, and Tailwind CSS, and deployed on
 Vercel.
@@ -26,7 +27,7 @@ npx eslint .    # lint
 
 | Route       | Purpose                                                           |
 | ----------- | ----------------------------------------------------------------- |
-| `/`         | Positioning, the four capabilities, how a project runs, who it's for |
+| `/`         | Positioning, the five capabilities, how a project runs, who it's for |
 | `/services` | Each capability in depth, with anchors (`/services#ai-agents`)    |
 | `/about`    | What the company is, how it works, and an honest stage statement  |
 | `/contact`  | Enquiry form (see below) and what's useful to include             |
@@ -36,7 +37,7 @@ npx eslint .    # lint
 
 **Almost everything you will want to change lives in one file:
 [`src/content/site.ts`](src/content/site.ts).** Brand name and tagline,
-navigation, company copy, the four capabilities, audiences, process steps,
+navigation, company copy, the five capabilities, audiences, process steps,
 social links, and the contact address are all defined there, and the pages read
 from it.
 
@@ -122,7 +123,7 @@ src/
     site-header.tsx site-footer.tsx page-header.tsx
     section-heading.tsx capability-card.tsx capability-icon.tsx
     nav/     desktop and mobile navigation
-    art/     wind-lines.tsx, interface panels (hand-drawn SVG and markup)
+    art/     wind-lines.tsx, voice-wave.tsx, interface panels
     image-band.tsx        full-bleed photographic band
     ui/      button, card, tag, container, section
   assets/images/        photography + CREDITS.md
@@ -138,25 +139,47 @@ client components, because they need interaction.
 The palette, fonts, paper texture, and motion are defined as tokens at the top
 of [`src/app/globals.css`](src/app/globals.css).
 
-- Ivory `#F7F3EC`, ink `#17252A`, teal `#406B70`, mist `#E5ECE9`, gold `#A88750`
-- Gold is decorative only (rules, dots, frames). It is never used for text: at
-  3.04:1 on ivory it would fail contrast requirements.
-- Body text sits at `ink/70` or darker, which clears WCAG AA (4.5:1) on both
-  ivory and mist.
-- The artwork is inline SVG, drawn in `art/wind-lines.tsx`. Its drift animation
-  is disabled under `prefers-reduced-motion`.
-- Photography lives in `src/assets/images/`, is committed to the repo rather
-  than hot-linked, and is served through `next/image`. Provenance and licence
-  for every file are recorded in
-  [`src/assets/images/CREDITS.md`](src/assets/images/CREDITS.md).
-- The photography is deliberately abstract and atmospheric. No photographs of
-  people presented as staff, no offices presented as premises, no screenshots
-  presented as products.
+The site is **dark-first**. Colour tokens are semantic, not named after a
+colour, so the whole theme can be re-pitched from the one `@theme` block:
 
-Text over a photograph needs more contrast than text on flat ivory. The hero
-labels sit at `ink/85` for that reason: at `ink/70` they measured 4.25:1 against
-the darkest part of the background image, under the 4.5:1 AA floor. If you swap
-an image, re-check the text over it rather than assuming.
+| Token    | Role                  | Value     |
+| -------- | --------------------- | --------- |
+| `canvas` | page background       | `#0B1214` |
+| `panel`  | raised surface        | `#162226` |
+| `fg`     | primary text          | `#E9EFED` |
+| `chalk`  | inverted "spot" panel | `#F4F1EA` |
+| `teal`   | primary accent        | `#5FC9BA` |
+| `gold`   | secondary accent      | `#DCB673` |
+
+Use `bg-canvas`, `bg-panel`, `text-fg`, `text-fg/70`, `border-fg/10` and so on.
+Because the names are semantic, **re-pitching to a light theme is a change to
+those six values plus the accents**, not a sweep through every component. The
+accents are deliberately bright: they clear 4.5:1 on `canvas`, and a light
+theme would need them darkened again.
+
+- Display face is Space Grotesk (`font-display`), set tight at `-0.03em` and
+  `-0.04em` for `h1`. Body text is Inter.
+- Text sits at `fg/65` or lighter, which is 7.27:1 on `canvas` and 6.63:1 on
+  `panel`. There is a lot of headroom in dark mode; the constraint that
+  actually bites is text over photography, below.
+- `teal` measures 1.76:1 on `chalk`. **Never put a teal link on a chalk panel.**
+  Use `text-canvas` there.
+- The `.edge` utility draws a teal-to-gold hairline gradient border, the modern
+  substitute for a flat 1px line. `.aura` and `.aurora` are accent glows,
+  `.glass` is a frosted dark surface.
+- `.voice-bar` animates the waveform with CSS only, no JavaScript and no audio.
+  Under `prefers-reduced-motion` the bars freeze at their staggered heights, so
+  it still reads as a voice trace rather than collapsing flat.
+- Artwork is inline SVG and markup in `components/art/`: `wind-lines.tsx` plus
+  five interface panels, one per capability.
+
+Text over a photograph is the one place contrast gets tight, because the
+background is no longer a flat token. Both background photographs are *light*
+images sitting under dark overlays, so the risk is the overlay being too weak.
+Measured worst cases: hero `(33,59,59)`, statement band `(14,34,40)`, page
+header `(36,43,42)`, all giving 5.35:1 or better at `fg/65`. **If you swap an
+image, measure the rendered pixels rather than assuming**. An earlier light
+theme failed this check at 3.84:1 and it was not visible by eye.
 
 Overriding a button's colours? Go through `cn()`:
 `cn(buttonVariants({ variant: "inverse" }), "mt-9")`. Passing `className` inside
@@ -172,7 +195,7 @@ Append to `capabilities` in `src/content/site.ts`:
 {
   id: "a-stable-id",
   name: "The name",
-  icon: "agent",                 // agent | automation | analysis | custom
+  icon: "agent",                 // agent | voice | automation | analysis | custom
   summary: "One line.",
   body: ["A paragraph.", "Another."],
   examples: ["Illustrative application"],

@@ -22,18 +22,18 @@ export function Blocks({ className }: { className?: string }) {
                 ? accent.has(index)
                   ? "border-gold/50 bg-gold/25"
                   : "border-teal/35 bg-teal/15"
-                : "border-dashed border-ink/15 bg-transparent",
+                : "border-dashed border-fg/15 bg-transparent",
             )}
           />
         ))}
       </div>
 
-      <div className="mt-4 flex flex-col gap-2 border-t border-ink/10 pt-3">
+      <div className="mt-4 flex flex-col gap-2 border-t border-fg/10 pt-3">
         {["Built around your constraints", "Nothing you do not need"].map(
           (line) => (
             <div key={line} className="flex items-center gap-2">
               <span className="h-px w-3 shrink-0 bg-gold" />
-              <span className="font-sans text-[0.6875rem] text-ink/65">
+              <span className="font-sans text-[0.6875rem] text-fg/65">
                 {line}
               </span>
             </div>

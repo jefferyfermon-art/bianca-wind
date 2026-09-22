@@ -24,8 +24,8 @@ export function DesktopNav() {
                 className={cn(
                   "relative py-1 text-sm transition-colors duration-200",
                   active
-                    ? "text-ink"
-                    : "text-ink/70 hover:text-ink",
+                    ? "text-fg"
+                    : "text-fg/70 hover:text-fg",
                 )}
               >
                 {item.label}

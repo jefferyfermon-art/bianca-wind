@@ -59,7 +59,7 @@ export function CapabilityCard({
   return (
     <Link
       href={href}
-      className={cn(cardSurface, layout, "group hover:border-ink/30")}
+      className={cn(cardSurface, layout, "group hover:border-fg/30")}
     >
       {content}
     </Link>

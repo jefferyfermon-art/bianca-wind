@@ -41,7 +41,12 @@ export type InternalNotes = {
 };
 
 /** Icon key, mapped to a lucide icon in `src/components/capability-icon.tsx`. */
-export type IconKey = "agent" | "automation" | "analysis" | "custom";
+export type IconKey =
+  | "agent"
+  | "voice"
+  | "automation"
+  | "analysis"
+  | "custom";
 
 export type Capability = {
   id: string;
@@ -91,10 +96,10 @@ export const brand = {
    */
   url: null as string | null,
   description:
-    "Bianca Wind develops AI software: agents, automation tools, data analysis tools, and custom AI solutions for individuals and businesses.",
+    "Bianca Wind develops AI software: agents you type to and voice agents you talk to, automation, data analysis, and custom systems for individuals and businesses.",
   /** Short descriptor used in the footer and on cards. */
   shortDescription:
-    "AI agents, automation, data analysis, and custom AI solutions.",
+    "AI agents, voice agents, automation, data analysis, and custom AI solutions.",
 } as const;
 
 /* -------------------------------------------------------------------------- */
@@ -120,7 +125,7 @@ export const footerNav: NavItem[] = [
 export const company = {
   /** One-line answer to "what is this?". */
   short:
-    "Bianca Wind develops artificial intelligence software: AI agents, automation tools, data analysis tools, and custom solutions built around the way a person or a team already works.",
+    "Bianca Wind develops artificial intelligence software: AI agents, voice agents for music and language training, automation tools, data analysis tools, and custom solutions built around the way a person or a team already works.",
 
   /** Home page introduction. */
   intro: [
@@ -130,7 +135,7 @@ export const company = {
 
   /** About page. */
   about: [
-    "Bianca Wind is a software company working on applied artificial intelligence: agents, automation, data analysis, and custom systems for individuals and for businesses.",
+    "Bianca Wind is a software company working on applied artificial intelligence: agents, voice agents, automation, data analysis, and custom systems for individuals and for businesses.",
     "The interesting problem in AI right now is rarely the model. It is the fit: the gap between what a capable general system can do and what a specific person or team actually needs on a Tuesday afternoon. Closing that gap is engineering work: understanding a process properly, choosing where automation genuinely helps, and building something people will still want to use in three months.",
     "We work in small, narrow steps for that reason. A prototype aimed at one real task tells you more than a long specification, and it tells you sooner, including when the honest answer is that a simpler tool, or no tool at all, would serve better.",
   ],
@@ -177,6 +182,29 @@ export const capabilities: Capability[] = [
     internal: {
       notes:
         "Examples are illustrative and labelled as such on the services page. Replace with real delivered work once there is some, and move them under a case-studies section rather than listing them as capabilities.",
+      verified: false,
+    },
+  },
+  {
+    id: "voice-agents",
+    name: "Voice AI agents",
+    icon: "voice",
+    summary:
+      "Agents you talk to rather than type to, built for practice: music and language training.",
+    body: [
+      "A voice agent listens, answers, and keeps a conversation going in real time. That suits practice better than a text box does, because the thing being practised is itself spoken or played, and the feedback has to arrive while you are still mid-attempt.",
+      "We build these for specific uses rather than as a general-purpose assistant. Music and language training are the two we work on: the learner speaks or plays, the agent responds to what it actually heard, and the session adjusts from there.",
+    ],
+    examples: [
+      "Conversation practice that adapts to the learner's level",
+      "Spoken pronunciation feedback, given immediately",
+      "Ear training and sight-singing drills that listen back",
+      "Guided practice that keeps a beginner going between lessons",
+    ],
+    featured: true,
+    internal: {
+      notes:
+        "Voice work for music and language training is confirmed by the owner as a line the business builds. The four examples below it are illustrative, like every other capability -- replace them with real projects once there are some.",
       verified: false,
     },
   },

@@ -22,19 +22,19 @@ export default function ServicesPage() {
     <>
       <PageHeader
         eyebrow="What we build"
-        title="Four kinds of work"
+        title="Five kinds of work"
         description="Most projects start as one of these. In practice they overlap: an agent usually needs automation underneath it, and analysis is often what makes either one worth having."
       />
 
       {/* Section index, so the page is navigable without scrolling blindly. */}
-      <Section spacing="tight" className="border-b border-ink/10">
+      <Section spacing="tight" className="border-b border-fg/10">
         <Container>
           <ul className="flex flex-wrap gap-x-8 gap-y-4">
             {capabilities.map((capability) => (
               <li key={capability.id}>
                 <a
                   href={`#${capability.id}`}
-                  className="inline-flex items-center gap-3 text-sm text-ink/75 transition-colors hover:text-ink"
+                  className="inline-flex items-center gap-3 text-sm text-fg/75 transition-colors hover:text-fg"
                 >
                   <CapabilityIcon icon={capability.icon} variant="bare" />
                   {capability.name}
@@ -43,7 +43,7 @@ export default function ServicesPage() {
             ))}
           </ul>
 
-          <p className="mt-8 max-w-2xl border-t border-ink/10 pt-6 text-sm leading-relaxed text-ink/70">
+          <p className="mt-8 max-w-2xl border-t border-fg/10 pt-6 text-sm leading-relaxed text-fg/70">
             {capabilitiesNote}
           </p>
         </Container>
@@ -62,10 +62,10 @@ export default function ServicesPage() {
                 <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
                   <div>
                     <CapabilityIcon icon={capability.icon} />
-                    <h2 className="mt-6 font-serif text-3xl leading-tight text-ink sm:text-4xl">
+                    <h2 className="mt-6 font-display text-3xl leading-tight text-fg sm:text-4xl">
                       {capability.name}
                     </h2>
-                    <p className="mt-4 body-copy text-ink/75">
+                    <p className="mt-4 body-copy text-fg/75">
                       {capability.summary}
                     </p>
 
@@ -80,24 +80,24 @@ export default function ServicesPage() {
                       {capability.body.map((paragraph) => (
                         <p
                           key={paragraph.slice(0, 32)}
-                          className="body-copy text-ink/80"
+                          className="body-copy text-fg/80"
                         >
                           {paragraph}
                         </p>
                       ))}
                     </div>
 
-                    <div className="mt-10 border-t border-ink/10 pt-8">
+                    <div className="mt-10 border-t border-fg/10 pt-8">
                       {/* Clearly labelled as illustrative. These are not
                           descriptions of delivered client work. */}
-                      <h3 className="eyebrow text-ink/70">
+                      <h3 className="eyebrow text-fg/70">
                         What it can look like
                       </h3>
                       <ul className="mt-5 flex flex-col gap-3">
                         {capability.examples.map((example) => (
                           <li
                             key={example}
-                            className="flex items-start gap-3 body-copy-sm text-ink/75"
+                            className="flex items-start gap-3 body-copy-sm text-fg/75"
                           >
                             <span
                               aria-hidden="true"
@@ -107,7 +107,7 @@ export default function ServicesPage() {
                           </li>
                         ))}
                       </ul>
-                      <p className="mt-6 text-sm leading-relaxed text-ink/70">
+                      <p className="mt-6 text-sm leading-relaxed text-fg/70">
                         Illustrations of what this covers, not a list of
                         completed projects.
                       </p>
@@ -123,20 +123,20 @@ export default function ServicesPage() {
       {/* ------------------------------------------------------------------ */}
       {/*  How a project runs                                                */}
       {/* ------------------------------------------------------------------ */}
-      <Section className="border-t border-ink/10 bg-mist/35">
+      <Section className="border-t border-fg/10 bg-panel/35">
         <Container>
-          <h2 className="font-serif text-3xl leading-tight text-ink sm:text-4xl">
+          <h2 className="font-display text-3xl leading-tight text-fg sm:text-4xl">
             How a project runs
           </h2>
 
           <ol className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step, index) => (
-              <li key={step.id} className="border-t border-ink/15 pt-5">
-                <span className="eyebrow text-ink/70">
+              <li key={step.id} className="border-t border-fg/15 pt-5">
+                <span className="eyebrow text-fg/70">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 font-serif text-2xl text-ink">{step.name}</h3>
-                <p className="mt-3 body-copy-sm text-ink/75">
+                <h3 className="mt-3 font-display text-2xl text-fg">{step.name}</h3>
+                <p className="mt-3 body-copy-sm text-fg/75">
                   {step.body}
                 </p>
               </li>

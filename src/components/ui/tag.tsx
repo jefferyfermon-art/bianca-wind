@@ -8,9 +8,9 @@ const tagVariants = cva(
     variants: {
       variant: {
         /** Neutral status, e.g. "Work in progress". */
-        solid: "bg-mist text-ink/80",
+        solid: "bg-panel text-fg/80",
         /** Quieter qualifier, e.g. "Working title". */
-        outline: "border border-ink/20 text-ink/70",
+        outline: "border border-fg/20 text-fg/70",
       },
     },
     defaultVariants: {

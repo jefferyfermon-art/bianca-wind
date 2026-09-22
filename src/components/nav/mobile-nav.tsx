@@ -48,7 +48,7 @@ export function MobileNav() {
         aria-controls={PANEL_ID}
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((value) => !value)}
-        className="-mr-2 inline-flex size-10 items-center justify-center rounded-md text-ink transition-colors hover:bg-mist/70"
+        className="-mr-2 inline-flex size-10 items-center justify-center rounded-md text-fg transition-colors hover:bg-panel/70"
       >
         {open ? (
           <X aria-hidden="true" className="size-5" />
@@ -60,7 +60,7 @@ export function MobileNav() {
       <div
         id={PANEL_ID}
         hidden={!open}
-        className="absolute inset-x-0 top-full border-b border-ink/10 bg-ivory shadow-[0_18px_40px_-28px_rgba(23,37,42,0.5)]"
+        className="absolute inset-x-0 top-full border-b border-fg/10 bg-canvas shadow-[0_22px_50px_-28px_rgba(0,0,0,0.8)]"
       >
         <nav aria-label="Main" className="px-6 py-4 sm:px-8">
           <ul className="flex flex-col">
@@ -68,20 +68,20 @@ export function MobileNav() {
               const active = isActiveRoute(pathname, item.href);
 
               return (
-                <li key={item.href} className="border-b border-ink/8 last:border-b-0">
+                <li key={item.href} className="border-b border-fg/8 last:border-b-0">
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "flex items-center gap-3 py-3.5 font-serif text-xl transition-colors",
-                      active ? "text-ink" : "text-ink/65",
+                      "flex items-center gap-3 py-3.5 font-display text-xl transition-colors",
+                      active ? "text-fg" : "text-fg/65",
                     )}
                   >
                     <span
                       aria-hidden="true"
                       className={cn(
                         "h-px w-5 transition-colors",
-                        active ? "bg-gold" : "bg-ink/20",
+                        active ? "bg-gold" : "bg-fg/20",
                       )}
                     />
                     {item.label}

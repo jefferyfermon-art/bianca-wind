@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
  * surface without nesting one interactive element inside another.
  */
 export const cardSurface =
-  "rounded-lg border border-ink/12 bg-white/45 backdrop-blur-[1px]";
+  "rounded-xl border border-fg/12 bg-panel/70 backdrop-blur-[2px]";
 
 export function Card({ className, ...props }: React.ComponentProps<"div">) {
   return <div className={cn(cardSurface, className)} {...props} />;
@@ -22,7 +22,7 @@ export function CardHeader({
 export function CardTitle({ className, ...props }: React.ComponentProps<"h3">) {
   return (
     <h3
-      className={cn("font-serif text-2xl leading-tight text-ink", className)}
+      className={cn("font-display text-2xl leading-tight text-fg", className)}
       {...props}
     />
   );
@@ -34,7 +34,7 @@ export function CardDescription({
 }: React.ComponentProps<"p">) {
   return (
     <p
-      className={cn("text-[0.9375rem] leading-relaxed text-ink/70", className)}
+      className={cn("text-[0.9375rem] leading-relaxed text-fg/70", className)}
       {...props}
     />
   );

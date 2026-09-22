@@ -1,10 +1,11 @@
-import { Blocks, Bot, LineChart, Workflow } from "lucide-react";
+import { AudioLines, Blocks, Bot, LineChart, Workflow } from "lucide-react";
 
 import type { IconKey } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 const icons = {
   agent: Bot,
+  voice: AudioLines,
   automation: Workflow,
   analysis: LineChart,
   custom: Blocks,
@@ -42,7 +43,7 @@ export function CapabilityIcon({
     <span
       aria-hidden="true"
       className={cn(
-        "inline-flex size-12 shrink-0 items-center justify-center rounded-md border border-ink/12 bg-mist/60 text-teal",
+        "inline-flex size-12 shrink-0 items-center justify-center rounded-md border border-fg/12 bg-panel/60 text-teal",
         className,
       )}
     >

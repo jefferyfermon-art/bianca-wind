@@ -10,7 +10,7 @@ type ImageBandProps = {
   className?: string;
   height?: "sm" | "md" | "lg";
   /** Which way the overlay leans, so overlaid text stays readable. */
-  tone?: "ink" | "light";
+  tone?: "dark" | "light";
   /** Set on the first band above the fold; leave off elsewhere. */
   priority?: boolean;
   /** Slow scale drift. Disabled under prefers-reduced-motion. */
@@ -35,7 +35,7 @@ export function ImageBand({
   children,
   className,
   height = "md",
-  tone = "ink",
+  tone = "dark",
   priority = false,
   drift = false,
 }: ImageBandProps) {
@@ -63,9 +63,9 @@ export function ImageBand({
         aria-hidden="true"
         className={cn(
           "absolute inset-0 -z-10",
-          tone === "ink"
-            ? "bg-gradient-to-r from-ink/80 via-ink/55 to-ink/25"
-            : "bg-gradient-to-r from-ivory/90 via-ivory/70 to-ivory/40",
+          tone === "dark"
+            ? "bg-gradient-to-r from-canvas/90 via-canvas/70 to-canvas/40"
+            : "bg-gradient-to-r from-chalk/90 via-chalk/70 to-chalk/40",
         )}
       />
 

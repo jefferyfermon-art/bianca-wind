@@ -21,7 +21,7 @@ export function PageHeader({
   image = inkWash,
 }: PageHeaderProps) {
   return (
-    <div className="relative overflow-hidden border-b border-ink/10 bg-mist/35">
+    <div className="relative overflow-hidden border-b border-fg/10 bg-panel/35">
       {/* Decorative paper texture, washed back behind the heading. */}
       <div aria-hidden="true" className="absolute inset-0">
         <Image
@@ -33,7 +33,7 @@ export function PageHeader({
           placeholder="blur"
           className="object-cover opacity-45"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-ivory/85 via-ivory/70 to-ivory/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-canvas/85 via-canvas/70 to-canvas/30" />
       </div>
 
       <div

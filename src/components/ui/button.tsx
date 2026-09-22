@@ -12,12 +12,12 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-ink text-ivory hover:bg-teal",
+        primary: "bg-fg text-canvas hover:bg-teal",
         secondary:
-          "border border-ink/25 bg-transparent text-ink hover:border-ink/50 hover:bg-mist/60",
-        /** For use on the deep ink panels. */
-        inverse: "bg-ivory text-ink hover:bg-mist",
-        ghost: "text-ink hover:bg-mist/70",
+          "border border-fg/25 bg-transparent text-fg hover:border-fg/50 hover:bg-panel/60",
+        /** For the inverted chalk panels: dark button on a light ground. */
+        inverse: "bg-canvas text-chalk hover:bg-panel",
+        ghost: "text-fg hover:bg-panel/70",
         link: "text-teal underline-offset-4 hover:underline",
       },
       size: {

@@ -6,7 +6,7 @@ import Link from "next/link";
 import ridges from "@/assets/images/ridges.jpg";
 import { AgentRun } from "@/components/art/agent-run";
 import { Analysis } from "@/components/art/analysis";
-import { Blocks } from "@/components/art/blocks";
+import { VoiceWave } from "@/components/art/voice-wave";
 import { CapabilityIcon } from "@/components/capability-icon";
 import { ImageBand } from "@/components/image-band";
 import { SectionHeading } from "@/components/section-heading";
@@ -29,10 +29,11 @@ import { cn } from "@/lib/utils";
 
 /** Bento cell spans, so the capability grid is asymmetric rather than a row of four. */
 const cellSpans = [
-  "lg:col-span-4",
+  "lg:col-span-3",
+  "lg:col-span-3",
   "lg:col-span-2",
   "lg:col-span-2",
-  "lg:col-span-4",
+  "lg:col-span-2",
 ];
 
 export default function HomePage() {
@@ -56,10 +57,10 @@ export default function HomePage() {
             placeholder="blur"
             className="object-cover opacity-45"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-ivory/30 via-ivory/75 to-ivory" />
+          <div className="absolute inset-0 bg-gradient-to-b from-canvas/30 via-canvas/75 to-canvas" />
           {/* Keeps the text column light enough for AA contrast, while the
               photograph stays visible on the right behind the panels. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-ivory/85 via-ivory/45 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-canvas/85 via-canvas/45 to-transparent" />
         </div>
 
         <div
@@ -68,22 +69,22 @@ export default function HomePage() {
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-ivory"
+          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-canvas"
         />
 
         <Container>
           <div className="grid items-center gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-20">
             <div>
-              <p className="eyebrow flex items-center gap-3 text-ink/85">
+              <p className="eyebrow flex items-center gap-3 text-fg/85">
                 <span aria-hidden="true" className="h-px w-8 bg-gold" />
                 AI agents &bull; Automation &bull; Data analysis
               </p>
 
-              <h1 className="mt-7 text-balance text-[2.75rem] leading-[1.03] text-ink sm:text-6xl lg:text-[4.5rem]">
+              <h1 className="mt-7 text-balance text-[2.75rem] leading-[1.03] text-fg sm:text-6xl lg:text-[4.5rem]">
                 {brand.tagline}
               </h1>
 
-              <p className="mt-8 max-w-xl text-lg leading-[1.65] text-ink/80 sm:text-xl">
+              <p className="mt-8 max-w-xl text-lg leading-[1.65] text-fg/80 sm:text-xl">
                 {brand.description}
               </p>
 
@@ -106,12 +107,12 @@ export default function HomePage() {
 
             {/* Composite interface illustration: two staggered panels. */}
             <div className="flex flex-col gap-4">
-              <AgentRun className="sm:w-[88%]" />
+              <VoiceWave className="sm:w-[92%]" />
               <Analysis className="sm:ml-auto sm:w-[88%]" />
             </div>
           </div>
 
-          <p className="mt-10 text-sm text-ink/85">{illustrationCaption}</p>
+          <p className="mt-10 text-sm text-fg/85">{illustrationCaption}</p>
         </Container>
       </Section>
 
@@ -122,13 +123,13 @@ export default function HomePage() {
         <Container>
           <SectionHeading
             eyebrow="What we build"
-            title="Four kinds of work"
+            title="Five kinds of work"
             description="Most projects start as one of these, and often end up drawing on more than one."
           />
 
           <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
             {capabilities.map((capability, index) => {
-              const wide = cellSpans[index] === "lg:col-span-4";
+              const wide = cellSpans[index] === "lg:col-span-3";
 
               return (
                 <li key={capability.id} className={cn("reveal", cellSpans[index])}>
@@ -136,16 +137,16 @@ export default function HomePage() {
                     href={`/services#${capability.id}` as Route}
                     className={cn(
                       cardSurface,
-                      "lift group flex h-full flex-col gap-6 p-6 hover:border-ink/30 sm:p-7",
+                      "lift group flex h-full flex-col gap-6 p-6 hover:border-fg/30 sm:p-7",
                       wide && "lg:flex-row lg:items-center lg:gap-8",
                     )}
                   >
                     <div className={cn("flex flex-col gap-4", wide && "lg:flex-1")}>
                       <CapabilityIcon icon={capability.icon} />
-                      <h3 className="font-serif text-2xl leading-tight text-ink">
+                      <h3 className="font-display text-2xl leading-tight text-fg">
                         {capability.name}
                       </h3>
-                      <p className="body-copy-sm text-ink/75">
+                      <p className="body-copy-sm text-fg/75">
                         {capability.summary}
                       </p>
                       <span className="mt-auto inline-flex items-center gap-2 pt-2 text-sm text-teal">
@@ -161,8 +162,8 @@ export default function HomePage() {
                     {capability.icon === "agent" ? (
                       <AgentRun className="hidden lg:block lg:w-[52%]" />
                     ) : null}
-                    {capability.icon === "custom" ? (
-                      <Blocks className="hidden lg:block lg:w-[52%]" />
+                    {capability.icon === "voice" ? (
+                      <VoiceWave className="hidden lg:block lg:w-[52%]" />
                     ) : null}
                   </Link>
                 </li>
@@ -175,11 +176,11 @@ export default function HomePage() {
       {/* ------------------------------------------------------------------ */}
       {/*  Statement band                                                    */}
       {/* ------------------------------------------------------------------ */}
-      <ImageBand image={ridges} height="md" tone="ink" drift>
-        <p className="max-w-3xl text-balance font-serif text-3xl leading-[1.15] text-ivory sm:text-4xl lg:text-5xl">
+      <ImageBand image={ridges} height="lg" tone="dark" drift>
+        <p className="max-w-3xl text-balance display-xl text-4xl text-fg sm:text-5xl lg:text-6xl">
           Software should fit the work, not the other way round.
         </p>
-        <p className="mt-6 max-w-xl body-copy text-ivory/80">
+        <p className="mt-6 max-w-xl body-copy text-fg/80">
           {brand.shortDescription}
         </p>
       </ImageBand>
@@ -187,7 +188,7 @@ export default function HomePage() {
       {/* ------------------------------------------------------------------ */}
       {/*  Approach                                                          */}
       {/* ------------------------------------------------------------------ */}
-      <Section className="border-y border-ink/10 bg-mist/40">
+      <Section className="border-y border-fg/10 bg-panel/40">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
             <SectionHeading
@@ -197,7 +198,7 @@ export default function HomePage() {
 
             <div className="flex flex-col gap-6">
               {company.intro.map((paragraph) => (
-                <p key={paragraph.slice(0, 32)} className="body-copy text-ink/80">
+                <p key={paragraph.slice(0, 32)} className="body-copy text-fg/80">
                   {paragraph}
                 </p>
               ))}
@@ -217,15 +218,15 @@ export default function HomePage() {
 
           <div className="mt-16 grid gap-4 sm:grid-cols-3">
             {principles.map((principle) => (
-              <Card key={principle.id} className="reveal lift bg-white/60 p-6">
-                <h3 className="flex items-start gap-3 font-serif text-xl leading-tight text-ink">
+              <Card key={principle.id} className="reveal lift edge p-6">
+                <h3 className="flex items-start gap-3 font-display text-xl leading-tight text-fg">
                   <Plus
                     aria-hidden="true"
                     className="mt-1 size-4 shrink-0 text-gold"
                   />
                   {principle.name}
                 </h3>
-                <p className="mt-3 body-copy-sm text-ink/75">{principle.body}</p>
+                <p className="mt-3 body-copy-sm text-fg/75">{principle.body}</p>
               </Card>
             ))}
           </div>
@@ -244,14 +245,14 @@ export default function HomePage() {
 
           <ol className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step, index) => (
-              <li key={step.id} className="border-t border-ink/15 pt-5">
-                <span className="eyebrow text-ink/70">
+              <li key={step.id} className="border-t border-fg/15 pt-5">
+                <span className="eyebrow text-fg/70">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 font-serif text-2xl text-ink">
+                <h3 className="mt-3 font-display text-2xl text-fg">
                   {step.name}
                 </h3>
-                <p className="mt-3 body-copy-sm text-ink/75">{step.body}</p>
+                <p className="mt-3 body-copy-sm text-fg/75">{step.body}</p>
               </li>
             ))}
           </ol>
@@ -263,7 +264,7 @@ export default function HomePage() {
       {/* ------------------------------------------------------------------ */}
       <Section spacing="tight">
         <Container>
-          <div className="border-t border-ink/10 pt-14">
+          <div className="border-t border-fg/10 pt-14">
             <SectionHeading
               eyebrow="Who we build for"
               title="Individuals and businesses"
@@ -272,11 +273,11 @@ export default function HomePage() {
             <div className="mt-10 grid gap-10 sm:grid-cols-2 sm:gap-16">
               {audiences.map((audience) => (
                 <div key={audience.id}>
-                  <h3 className="flex items-center gap-3 font-serif text-2xl text-ink">
+                  <h3 className="flex items-center gap-3 font-display text-2xl text-fg">
                     <span aria-hidden="true" className="h-px w-6 bg-gold" />
                     {audience.name}
                   </h3>
-                  <p className="mt-4 body-copy text-ink/75">{audience.body}</p>
+                  <p className="mt-4 body-copy text-fg/75">{audience.body}</p>
                 </div>
               ))}
             </div>
@@ -289,23 +290,23 @@ export default function HomePage() {
       {/* ------------------------------------------------------------------ */}
       <Section spacing="tight">
         <Container>
-          <div className="grid gap-12 border-t border-ink/10 pt-14 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
+          <div className="grid gap-12 border-t border-fg/10 pt-14 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
             <SectionHeading eyebrow="Questions" title="Before you write in" />
 
             <div className="flex flex-col">
               {faqs.map((faq) => (
                 <details
                   key={faq.id}
-                  className="group border-b border-ink/12 py-5 first:pt-0"
+                  className="group border-b border-fg/12 py-5 first:pt-0"
                 >
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 font-serif text-xl text-ink marker:hidden">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 font-display text-xl text-fg marker:hidden">
                     {faq.question}
                     <Plus
                       aria-hidden="true"
                       className="mt-1 size-4 shrink-0 text-gold transition-transform duration-200 group-open:rotate-45"
                     />
                   </summary>
-                  <p className="mt-4 max-w-2xl body-copy-sm text-ink/75">
+                  <p className="mt-4 max-w-2xl body-copy-sm text-fg/75">
                     {faq.answer}
                   </p>
                 </details>
@@ -320,20 +321,20 @@ export default function HomePage() {
       {/* ------------------------------------------------------------------ */}
       <Section spacing="tight">
         <Container>
-          <div className="relative overflow-hidden rounded-xl border border-ink/12 bg-ink px-7 py-16 text-center sm:px-12 sm:py-20">
+          <div className="relative overflow-hidden rounded-2xl bg-chalk px-7 py-16 text-center sm:px-12 sm:py-20">
             {/* A photograph was tried here and was invisible: the panel has to
                 stay dark for the ivory text, which buried it. A gradient gives
                 the same depth for no bytes. */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-              <div className="ink-glow absolute inset-0 opacity-70" />
+              <div className="aura absolute inset-0 opacity-45" />
               <div className="grid-rule absolute inset-0 opacity-15" />
             </div>
 
             <div className="relative mx-auto max-w-2xl">
-              <h2 className="text-balance font-serif text-4xl leading-tight text-ivory sm:text-5xl">
+              <h2 className="display-xl text-balance text-4xl text-canvas sm:text-5xl">
                 {contact.heading}
               </h2>
-              <p className="mt-6 text-lg leading-relaxed text-ivory/80">
+              <p className="mt-6 text-lg leading-relaxed text-canvas/80">
                 {contact.invitation}
               </p>
               <Link

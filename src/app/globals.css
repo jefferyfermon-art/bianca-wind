@@ -4,19 +4,30 @@
 /*  Design tokens                                                             */
 /* -------------------------------------------------------------------------- */
 
+/*
+ * The site is dark-first. Tokens are semantic rather than named after a
+ * colour, so the whole theme can be re-pitched from this one block:
+ *
+ *   canvas  page background        panel  raised surface
+ *   fg      primary text           chalk  light "spot" panel, inverted
+ *   teal    primary accent         gold   secondary accent
+ *
+ * Accents are pitched bright enough to clear 4.5:1 on `canvas`; a light theme
+ * would need them re-darkened, which is why they live here and not inline.
+ */
 @theme {
-  /* Brand palette */
-  --color-ivory: #f7f3ec;
-  --color-ink: #17252a;
-  --color-teal: #406b70;
-  --color-mist: #e5ece9;
-  --color-gold: #a88750;
+  --color-canvas: #0b1214;
+  --color-panel: #162226;
+  --color-fg: #e9efed;
+  --color-chalk: #f4f1ea;
+  --color-teal: #5fc9ba;
+  --color-gold: #dcb673;
 
   /* Typefaces are loaded with next/font in src/app/layout.tsx */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-serif: var(--font-cormorant), ui-serif, "Iowan Old Style", Georgia,
-    Cambria, "Times New Roman", serif;
+  --font-display: var(--font-display-face), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -29,25 +40,31 @@
     scroll-behavior: smooth;
     /* Belt-and-braces against horizontal overflow on small screens. */
     overflow-x: hidden;
+    color-scheme: dark;
   }
 
   body {
-    background-color: var(--color-ivory);
-    color: var(--color-ink);
+    background-color: var(--color-canvas);
+    color: var(--color-fg);
     font-family: var(--font-sans);
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
 
+  /* Display face: tight, low-contrast grotesk rather than a book serif. */
   h1,
   h2,
   h3,
   h4 {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    letter-spacing: -0.015em;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.03em;
     text-wrap: balance;
+  }
+
+  h1 {
+    letter-spacing: -0.04em;
   }
 
   p {
@@ -55,8 +72,8 @@
   }
 
   ::selection {
-    background-color: color-mix(in srgb, var(--color-teal) 22%, transparent);
-    color: var(--color-ink);
+    background-color: color-mix(in srgb, var(--color-teal) 32%, transparent);
+    color: var(--color-fg);
   }
 
   :focus-visible {
@@ -65,15 +82,15 @@
     border-radius: 2px;
   }
 
-  /* Subtle paper grain across the whole page. Non-interactive, very low
-     opacity so body copy stays crisp. */
+  /* Film grain. Slightly stronger than on a light ground, where the same
+     opacity would be invisible. */
   body::after {
     content: "";
     position: fixed;
     inset: 0;
     z-index: 60;
     pointer-events: none;
-    opacity: 0.035;
+    opacity: 0.05;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
   }
 }
@@ -83,7 +100,6 @@
 /* -------------------------------------------------------------------------- */
 
 @layer utilities {
-  /* Small caps-style eyebrow label used above section headings. */
   .eyebrow {
     font-size: 0.6875rem;
     font-weight: 500;
@@ -91,8 +107,7 @@
     text-transform: uppercase;
   }
 
-  /* Standard body measure. Kept as a utility so the reading size can be
-     adjusted in one place rather than across every page. */
+  /* Standard body measure, adjustable in one place. */
   .body-copy {
     font-size: 1.125rem;
     line-height: 1.7;
@@ -103,23 +118,30 @@
     line-height: 1.65;
   }
 
-  /* Soft off-centre colour wash. Three wide radial gradients rather than an
-     image, so it costs nothing to download and scales to any viewport. */
+  /* Oversized display type for hero and band headlines. */
+  .display-xl {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+  }
+
+  /* Accent wash, used behind the hero. */
   .aurora {
     background-image:
       radial-gradient(
-        60% 55% at 12% 18%,
-        color-mix(in srgb, var(--color-teal) 20%, transparent),
+        58% 52% at 14% 12%,
+        color-mix(in srgb, var(--color-teal) 26%, transparent),
         transparent 70%
       ),
       radial-gradient(
-        50% 45% at 88% 8%,
-        color-mix(in srgb, var(--color-gold) 16%, transparent),
+        48% 44% at 86% 6%,
+        color-mix(in srgb, var(--color-gold) 18%, transparent),
         transparent 72%
       ),
       radial-gradient(
-        70% 60% at 65% 85%,
-        color-mix(in srgb, var(--color-mist) 85%, transparent),
+        66% 58% at 62% 96%,
+        color-mix(in srgb, var(--color-teal) 14%, transparent),
         transparent 75%
       );
   }
@@ -129,25 +151,39 @@
     background-image:
       linear-gradient(
         to right,
-        color-mix(in srgb, var(--color-ink) 7%, transparent) 1px,
+        color-mix(in srgb, var(--color-fg) 9%, transparent) 1px,
         transparent 1px
       ),
       linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--color-ink) 7%, transparent) 1px,
+        color-mix(in srgb, var(--color-fg) 9%, transparent) 1px,
         transparent 1px
       );
     background-size: 28px 28px;
   }
 
-  /* Frosted surface, for cards that sit over photography. */
+  /* Frosted dark surface, for panels over photography. */
   .glass {
-    background-color: color-mix(in srgb, white 72%, transparent);
-    backdrop-filter: blur(14px) saturate(1.1);
-    -webkit-backdrop-filter: blur(14px) saturate(1.1);
+    background-color: color-mix(in srgb, var(--color-panel) 72%, transparent);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
   }
 
-  /* Card hover: a small lift with a soft shadow. */
+  /* Hairline gradient edge, the modern substitute for a flat 1px border. */
+  .edge {
+    border: 1px solid transparent;
+    background-image:
+      linear-gradient(var(--color-panel), var(--color-panel)),
+      linear-gradient(
+        140deg,
+        color-mix(in srgb, var(--color-teal) 55%, transparent),
+        color-mix(in srgb, var(--color-fg) 10%, transparent) 45%,
+        color-mix(in srgb, var(--color-gold) 35%, transparent)
+      );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
   .lift {
     transition:
       transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -157,36 +193,40 @@
 
   .lift:hover {
     transform: translateY(-3px);
-    box-shadow: 0 22px 48px -28px color-mix(in srgb, var(--color-ink) 55%, transparent);
+    box-shadow: 0 24px 60px -30px color-mix(in srgb, var(--color-teal) 45%, transparent);
   }
 
-  /* Slow drift over a background image, so a still photograph breathes. */
   .ken-burns {
     animation: ken-burns 34s ease-in-out infinite alternate;
   }
 
-  /* Soft interior glow for the deep ink panels. */
-  .ink-glow {
+  /* Interior glow for the inverted spot panels. */
+  .aura {
     background-image:
       radial-gradient(
         75% 65% at 50% 0%,
-        color-mix(in srgb, var(--color-teal) 42%, transparent),
+        color-mix(in srgb, var(--color-teal) 30%, transparent),
         transparent 72%
       ),
       radial-gradient(
         45% 50% at 88% 105%,
-        color-mix(in srgb, var(--color-gold) 20%, transparent),
+        color-mix(in srgb, var(--color-gold) 22%, transparent),
         transparent 70%
       );
   }
 
-  /* Very slow drift for the decorative wind artwork. */
   .wind-drift {
     animation: wind-drift 26s ease-in-out infinite alternate;
   }
 
   .wind-drift-slow {
     animation: wind-drift 38s ease-in-out infinite alternate-reverse;
+  }
+
+  /* Live voice waveform. Each bar sets its own delay inline. */
+  .voice-bar {
+    animation: voice-bar 1200ms ease-in-out infinite alternate;
+    transform-origin: center;
   }
 }
 
@@ -205,6 +245,32 @@
   }
   to {
     transform: scale(1.07) translate3d(-1%, -1%, 0);
+  }
+}
+
+@keyframes voice-bar {
+  from {
+    transform: scaleY(0.18);
+    opacity: 0.55;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
   }
 }
 
@@ -231,7 +297,8 @@
   }
 }
 
-/* Honour reduced-motion preferences: no drift, no smooth scrolling. */
+/* Honour reduced-motion preferences. The waveform freezes mid-stride rather
+   than disappearing, so it still reads as a voice trace. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -239,7 +306,8 @@
 
   .wind-drift,
   .wind-drift-slow,
-  .ken-burns {
+  .ken-burns,
+  .voice-bar {
     animation: none;
   }
 

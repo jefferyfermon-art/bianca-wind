@@ -15,7 +15,7 @@ const steps: { id: string; label: string; state: StepState }[] = [
 const stateStyles: Record<StepState, string> = {
   done: "text-teal",
   running: "text-gold",
-  waiting: "text-ink/35",
+  waiting: "text-fg/35",
 };
 
 function StepIcon({ state }: { state: StepState }) {
@@ -38,7 +38,7 @@ export function AgentRun({ className }: { className?: string }) {
             <span
               className={cn(
                 "font-sans text-[0.8125rem] leading-snug",
-                step.state === "waiting" ? "text-ink/65" : "text-ink/80",
+                step.state === "waiting" ? "text-fg/65" : "text-fg/80",
               )}
             >
               {step.label}
@@ -50,9 +50,9 @@ export function AgentRun({ className }: { className?: string }) {
         ))}
       </ol>
 
-      <div className="mt-4 flex items-center gap-2 border-t border-ink/10 pt-3">
+      <div className="mt-4 flex items-center gap-2 border-t border-fg/10 pt-3">
         <span className="size-1.5 rounded-full bg-gold" />
-        <span className="font-sans text-[0.6875rem] tracking-wide text-ink/65">
+        <span className="font-sans text-[0.6875rem] tracking-wide text-fg/65">
           Paused for a person
         </span>
       </div>

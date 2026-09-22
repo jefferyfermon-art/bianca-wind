@@ -26,18 +26,18 @@ export function PanelFrame({
     <div
       aria-hidden="true"
       className={cn(
-        "glass relative overflow-hidden rounded-xl border border-ink/12",
-        "shadow-[0_24px_60px_-32px_rgba(23,37,42,0.45)]",
+        "glass relative overflow-hidden rounded-xl border border-fg/12",
+        "shadow-[0_28px_70px_-34px_rgba(0,0,0,0.75)]",
         className,
       )}
     >
-      <div className="flex items-center gap-2.5 border-b border-ink/10 bg-white/60 px-4 py-2.5">
+      <div className="flex items-center gap-2.5 border-b border-fg/10 bg-fg/[0.04] px-4 py-2.5">
         <span className="flex gap-1.5">
-          <span className="size-2 rounded-full bg-ink/15" />
-          <span className="size-2 rounded-full bg-ink/15" />
+          <span className="size-2 rounded-full bg-fg/15" />
+          <span className="size-2 rounded-full bg-fg/15" />
           <span className="size-2 rounded-full bg-gold/60" />
         </span>
-        <span className="truncate font-sans text-[0.6875rem] tracking-[0.08em] text-ink/70">
+        <span className="truncate font-sans text-[0.6875rem] tracking-[0.08em] text-fg/70">
           {label}
         </span>
       </div>

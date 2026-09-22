@@ -13,7 +13,7 @@ import {
 } from "./actions";
 
 const fieldClass =
-  "w-full rounded-md border border-ink/20 bg-white/70 px-4 py-3 text-[0.9375rem] text-ink transition-colors placeholder:text-ink/40 hover:border-ink/35 focus:border-teal focus:outline-none";
+  "w-full rounded-md border border-fg/20 bg-panel/70 px-4 py-3 text-[0.9375rem] text-fg transition-colors placeholder:text-fg/40 hover:border-fg/35 focus:border-teal focus:outline-none";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -30,7 +30,7 @@ function FieldError({ id, children }: { id: string; children?: string }) {
   if (!children) return null;
 
   return (
-    <p id={id} className="text-sm text-ink/80">
+    <p id={id} className="text-sm text-fg/80">
       {children}
     </p>
   );
@@ -46,10 +46,10 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="rounded-lg border border-ink/15 bg-mist/50 p-8"
+        className="rounded-lg border border-fg/15 bg-panel/50 p-8"
       >
-        <h2 className="font-serif text-2xl text-ink">Message sent</h2>
-        <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink/75">
+        <h2 className="font-display text-2xl text-fg">Message sent</h2>
+        <p className="mt-3 text-[0.9375rem] leading-relaxed text-fg/75">
           {state.message}
         </p>
       </div>
@@ -61,14 +61,14 @@ export function ContactForm() {
       {state.status === "error" && state.message ? (
         <p
           role="alert"
-          className="rounded-md border border-ink/20 bg-mist/60 px-4 py-3 text-sm text-ink"
+          className="rounded-md border border-fg/20 bg-panel/60 px-4 py-3 text-sm text-fg"
         >
           {state.message}
         </p>
       ) : null}
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="name" className="text-sm font-medium text-ink">
+        <label htmlFor="name" className="text-sm font-medium text-fg">
           Name
         </label>
         <input
@@ -79,13 +79,13 @@ export function ContactForm() {
           required
           aria-describedby={state.fieldErrors?.name ? "name-error" : undefined}
           aria-invalid={state.fieldErrors?.name ? true : undefined}
-          className={cn(fieldClass, state.fieldErrors?.name && "border-ink/60")}
+          className={cn(fieldClass, state.fieldErrors?.name && "border-fg/60")}
         />
         <FieldError id="name-error">{state.fieldErrors?.name}</FieldError>
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="text-sm font-medium text-ink">
+        <label htmlFor="email" className="text-sm font-medium text-fg">
           Email
         </label>
         <input
@@ -96,13 +96,13 @@ export function ContactForm() {
           required
           aria-describedby={state.fieldErrors?.email ? "email-error" : undefined}
           aria-invalid={state.fieldErrors?.email ? true : undefined}
-          className={cn(fieldClass, state.fieldErrors?.email && "border-ink/60")}
+          className={cn(fieldClass, state.fieldErrors?.email && "border-fg/60")}
         />
         <FieldError id="email-error">{state.fieldErrors?.email}</FieldError>
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="message" className="text-sm font-medium text-ink">
+        <label htmlFor="message" className="text-sm font-medium text-fg">
           Message
         </label>
         <textarea
@@ -117,7 +117,7 @@ export function ContactForm() {
           className={cn(
             fieldClass,
             "resize-y",
-            state.fieldErrors?.message && "border-ink/60",
+            state.fieldErrors?.message && "border-fg/60",
           )}
         />
         <FieldError id="message-error">{state.fieldErrors?.message}</FieldError>

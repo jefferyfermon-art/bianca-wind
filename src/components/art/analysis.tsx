@@ -14,9 +14,9 @@ const bars = [38, 54, 46, 72, 61, 88, 70, 96];
 export function Analysis({ className }: { className?: string }) {
   return (
     <PanelFrame label="analysis" className={className}>
-      <div className="flex items-center gap-2.5 rounded-md border border-ink/15 bg-white px-3 py-2">
-        <Search className="size-3.5 shrink-0 text-ink/40" />
-        <span className="truncate font-sans text-[0.75rem] text-ink/70">
+      <div className="flex items-center gap-2.5 rounded-md border border-fg/15 bg-fg/[0.06] px-3 py-2">
+        <Search className="size-3.5 shrink-0 text-fg/40" />
+        <span className="truncate font-sans text-[0.75rem] text-fg/70">
           Which accounts went quiet last month?
         </span>
       </div>
@@ -35,11 +35,11 @@ export function Analysis({ className }: { className?: string }) {
         ))}
       </div>
 
-      <div className="mt-3 h-px bg-ink/15" />
+      <div className="mt-3 h-px bg-fg/15" />
 
       <div className="mt-3 flex items-center gap-2">
         <span className="size-1.5 rounded-full bg-gold" />
-        <span className="font-sans text-[0.6875rem] text-ink/65">
+        <span className="font-sans text-[0.6875rem] text-fg/65">
           Answer drawn from records you already hold
         </span>
       </div>

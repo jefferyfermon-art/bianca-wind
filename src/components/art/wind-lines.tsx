@@ -69,7 +69,7 @@ export function WindLines({ className, variant = "hero" }: WindLinesProps) {
               <path
                 key={y}
                 d={current(y, amplitude, skew)}
-                stroke={isTeal ? "var(--color-teal)" : "var(--color-ink)"}
+                stroke={isTeal ? "var(--color-teal)" : "var(--color-fg)"}
                 strokeWidth={index % 4 === 0 ? 1.5 : 0.9}
                 strokeOpacity={isTeal ? 0.5 : 0.3}
                 strokeLinecap="round"

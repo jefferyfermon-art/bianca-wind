@@ -7,14 +7,14 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-ink/10 bg-mist/40">
+    <footer className="border-t border-fg/10 bg-panel/40">
       <Container className="py-14 sm:py-16">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-sm">
-            <Link href="/" className="font-serif text-xl text-ink">
+            <Link href="/" className="font-display text-xl text-fg">
               {brand.name}
             </Link>
-            <p className="mt-3 text-sm leading-relaxed text-ink/65">
+            <p className="mt-3 text-sm leading-relaxed text-fg/65">
               {brand.tagline}
             </p>
           </div>
@@ -25,7 +25,7 @@ export function SiteFooter() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-ink/65 transition-colors hover:text-ink"
+                    className="text-sm text-fg/65 transition-colors hover:text-fg"
                   >
                     {item.label}
                   </Link>
@@ -43,7 +43,7 @@ export function SiteFooter() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-ink/65 transition-colors hover:text-ink"
+                  className="text-sm text-fg/65 transition-colors hover:text-fg"
                 >
                   {social.label}
                 </a>
@@ -52,13 +52,13 @@ export function SiteFooter() {
           </ul>
         ) : null}
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-ink/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-ink/70">
+        <div className="mt-12 flex flex-col gap-3 border-t border-fg/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-fg/70">
             &copy; {year} {brand.name}. All rights reserved.
           </p>
           <Link
             href="/privacy"
-            className="text-xs text-ink/70 transition-colors hover:text-ink"
+            className="text-xs text-fg/70 transition-colors hover:text-fg"
           >
             Privacy
           </Link>

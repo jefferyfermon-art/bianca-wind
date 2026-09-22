@@ -30,7 +30,7 @@ export default function AboutPage() {
               {company.about.map((paragraph) => (
                 <p
                   key={paragraph.slice(0, 32)}
-                  className="body-copy text-ink/80"
+                  className="body-copy text-fg/80"
                 >
                   {paragraph}
                 </p>
@@ -41,8 +41,8 @@ export default function AboutPage() {
           {/* ---------------------------------------------------------- */}
           {/*  How we work                                               */}
           {/* ---------------------------------------------------------- */}
-          <div className="mt-16 border-t border-ink/10 pt-14">
-            <h2 className="font-serif text-2xl text-ink sm:text-3xl">
+          <div className="mt-16 border-t border-fg/10 pt-14">
+            <h2 className="font-display text-2xl text-fg sm:text-3xl">
               How we work
             </h2>
 
@@ -52,12 +52,12 @@ export default function AboutPage() {
                   key={step.id}
                   className="grid gap-3 sm:grid-cols-[4rem_minmax(0,1fr)] sm:gap-8"
                 >
-                  <span className="eyebrow pt-1 text-ink/70">
+                  <span className="eyebrow pt-1 text-fg/70">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div className="max-w-2xl">
-                    <h3 className="font-serif text-xl text-ink">{step.name}</h3>
-                    <p className="mt-2 body-copy text-ink/75">
+                    <h3 className="font-display text-xl text-fg">{step.name}</h3>
+                    <p className="mt-2 body-copy text-fg/75">
                       {step.body}
                     </p>
                   </div>
@@ -69,19 +69,19 @@ export default function AboutPage() {
           {/* ---------------------------------------------------------- */}
           {/*  Who we build for                                          */}
           {/* ---------------------------------------------------------- */}
-          <div className="mt-16 border-t border-ink/10 pt-14">
-            <h2 className="font-serif text-2xl text-ink sm:text-3xl">
+          <div className="mt-16 border-t border-fg/10 pt-14">
+            <h2 className="font-display text-2xl text-fg sm:text-3xl">
               Who we build for
             </h2>
 
             <div className="mt-10 grid gap-10 sm:grid-cols-2 sm:gap-16">
               {audiences.map((audience) => (
                 <div key={audience.id}>
-                  <h3 className="flex items-center gap-3 font-serif text-xl text-ink">
+                  <h3 className="flex items-center gap-3 font-display text-xl text-fg">
                     <span aria-hidden="true" className="h-px w-6 bg-gold" />
                     {audience.name}
                   </h3>
-                  <p className="mt-4 body-copy text-ink/75">
+                  <p className="mt-4 body-copy text-fg/75">
                     {audience.body}
                   </p>
                 </div>
@@ -92,16 +92,16 @@ export default function AboutPage() {
           {/* ---------------------------------------------------------- */}
           {/*  Honest positioning                                        */}
           {/* ---------------------------------------------------------- */}
-          <div className="mt-16 border-t border-ink/10 pt-14">
-            <div className="max-w-3xl rounded-lg border border-ink/12 bg-mist/45 p-8 sm:p-10">
-              <h2 className="font-serif text-2xl text-ink">
+          <div className="mt-16 border-t border-fg/10 pt-14">
+            <div className="max-w-3xl rounded-lg border border-fg/12 bg-panel/45 p-8 sm:p-10">
+              <h2 className="font-display text-2xl text-fg">
                 {company.stage.heading}
               </h2>
               <div className="mt-5 flex flex-col gap-4">
                 {company.stage.body.map((paragraph) => (
                   <p
                     key={paragraph.slice(0, 32)}
-                    className="body-copy text-ink/80"
+                    className="body-copy text-fg/80"
                   >
                     {paragraph}
                   </p>

@@ -28,8 +28,8 @@ export default function PrivacyPage() {
           <div className="max-w-3xl">
             <div className="flex flex-col gap-12">
               <section className="flex flex-col gap-4">
-                <h2 className="font-serif text-2xl text-ink">In short</h2>
-                <p className="body-copy text-ink/80">
+                <h2 className="font-display text-2xl text-fg">In short</h2>
+                <p className="body-copy text-fg/80">
                   This is a company website, not a product. It does not run
                   analytics or advertising, it does not set cookies of its own,
                   and it does not ask you to create an account or sign up to
@@ -38,15 +38,15 @@ export default function PrivacyPage() {
               </section>
 
               <section className="flex flex-col gap-4">
-                <h2 className="font-serif text-2xl text-ink">
+                <h2 className="font-display text-2xl text-fg">
                   What the site collects
                 </h2>
-                <p className="body-copy text-ink/80">
+                <p className="body-copy text-fg/80">
                   Nothing is collected from you as you read these pages. There
                   is no tracking script, no analytics tag, and no advertising
                   network.
                 </p>
-                <p className="body-copy text-ink/80">
+                <p className="body-copy text-fg/80">
                   Fonts are served from this site rather than from a third
                   party, so simply reading a page does not send a request to an
                   outside font provider.
@@ -54,8 +54,8 @@ export default function PrivacyPage() {
               </section>
 
               <section className="flex flex-col gap-4">
-                <h2 className="font-serif text-2xl text-ink">Hosting</h2>
-                <p className="body-copy text-ink/80">
+                <h2 className="font-display text-2xl text-fg">Hosting</h2>
+                <p className="body-copy text-fg/80">
                   The site is hosted on Vercel. Like any web host, Vercel
                   handles the technical request that delivers a page to you, and
                   keeps standard server logs that can include your IP address,
@@ -67,17 +67,17 @@ export default function PrivacyPage() {
 
               {contactFormEnabled ? (
                 <section className="flex flex-col gap-4">
-                  <h2 className="font-serif text-2xl text-ink">
+                  <h2 className="font-display text-2xl text-fg">
                     If you send an enquiry
                   </h2>
-                  <p className="body-copy text-ink/80">
+                  <p className="body-copy text-fg/80">
                     The contact form asks for your name, your email address, and
                     your message. Those details are used to read and reply to
                     what you sent, and for nothing else. They are delivered by
                     email through an email service provider, and are not sold,
                     shared for marketing, or added to a mailing list.
                   </p>
-                  <p className="body-copy text-ink/80">
+                  <p className="body-copy text-fg/80">
                     Please do not send confidential material through the form.
                     If a conversation needs to cover sensitive detail, we will
                     agree a suitable way to share it first.
@@ -86,10 +86,10 @@ export default function PrivacyPage() {
               ) : null}
 
               <section className="flex flex-col gap-4">
-                <h2 className="font-serif text-2xl text-ink">
+                <h2 className="font-display text-2xl text-fg">
                   Project data is separate
                 </h2>
-                <p className="body-copy text-ink/80">
+                <p className="body-copy text-fg/80">
                   This policy covers the website only. If we go on to work
                   together, how any of your data is accessed, stored, and
                   deleted during that work is agreed separately and in writing
@@ -99,8 +99,8 @@ export default function PrivacyPage() {
               </section>
 
               <section className="flex flex-col gap-4">
-                <h2 className="font-serif text-2xl text-ink">Changes</h2>
-                <p className="body-copy text-ink/80">
+                <h2 className="font-display text-2xl text-fg">Changes</h2>
+                <p className="body-copy text-fg/80">
                   If the way this site handles information changes, for
                   example if a contact form, an analytics tool, or a newsletter
                   is added later, this page will be updated to say so, and the

@@ -29,7 +29,7 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <p className="eyebrow flex items-center gap-3 text-ink/70">
+        <p className="eyebrow flex items-center gap-3 text-fg/70">
           <span aria-hidden="true" className="h-px w-6 bg-gold" />
           {eyebrow}
         </p>
@@ -37,7 +37,7 @@ export function SectionHeading({
 
       <Heading
         className={cn(
-          "text-balance text-ink",
+          "text-balance text-fg",
           size === "lg"
             ? "text-4xl leading-[1.08] sm:text-5xl lg:text-6xl"
             : "text-3xl leading-[1.12] sm:text-4xl",
@@ -49,7 +49,7 @@ export function SectionHeading({
       {description ? (
         <p
           className={cn(
-            "max-w-2xl body-copy text-ink/75",
+            "max-w-2xl body-copy text-fg/75",
             align === "center" && "mx-auto",
           )}
         >
