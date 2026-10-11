@@ -93,6 +93,58 @@ If you would rather publish an email address than run a form, set
 
 See `.env.example` for a template.
 
+## SMS relay (private)
+
+A pass-through relay for SMS forwarded from an iOS Shortcuts automation. It is
+not part of the public site: not linked from the navigation, excluded from
+`sitemap.xml`, `noindex`, and behind HTTP Basic Auth.
+
+**Nothing is stored.** No database, no Redis, no file, no in-memory cache, no
+browser storage. A message arrives at the webhook, is published straight to
+Pusher, and is dropped. The page keeps the current message in React state only,
+so reloading clears it and only the latest message is ever held.
+
+| Piece              | Path                  | Protected by                     |
+| ------------------ | --------------------- | -------------------------------- |
+| Webhook            | `POST /api/sms-webhook` | `X-Webhook-Secret` header      |
+| Channel authoriser | `POST /api/pusher-auth` | Basic Auth, via `src/proxy.ts` |
+| Live page          | `GET /sms`              | Basic Auth, via `src/proxy.ts` |
+
+Basic Auth lives in `src/proxy.ts`. Note that `middleware.ts` is deprecated in
+this version of Next.js and `proxy.ts` is the current convention. It **fails
+closed**: if `SMS_PAGE_USER` or `SMS_PAGE_PASSWORD` is missing the relay
+returns 503 rather than falling open.
+
+The webhook is deliberately not behind Basic Auth, because a Shortcut posts to
+it directly. It authenticates with its own shared secret, compared in constant
+time (`src/lib/safe-compare.ts`, which hashes both values first so the
+comparison cannot leak the secret's length).
+
+Only `PUSHER_KEY` and `PUSHER_CLUSTER` reach the browser. They are read in the
+server component and passed as props, rather than being given `NEXT_PUBLIC_`
+names, so the app id and secret cannot leak. The server never logs the shared
+secret or any message content.
+
+### Testing the webhook
+
+With the page open in a browser:
+
+```bash
+curl -i -X POST https://YOUR-DOMAIN/api/sms-webhook   -H "Content-Type: application/json"   -H "X-Webhook-Secret: $SMS_WEBHOOK_SECRET"   -d '{"from":"+15551234567","body":"Hello from the shortcut"}'
+```
+
+Expect `200` and `{"ok":true}`, and the message to appear on `/sms` at once.
+`401` means the secret did not match, `400` means the JSON was malformed or a
+field was missing, `503` means an environment variable is unset, and `502`
+means Pusher rejected the publish.
+
+### A caveat worth knowing
+
+"Nothing is stored" is true of this application. It is not a claim about
+Pusher: message content does travel through Pusher's infrastructure, which is
+outside our control. If that matters for the messages being forwarded, the
+relay needs a different transport.
+
 ## Deploying to Vercel
 
 Import the repository at [vercel.com/new](https://vercel.com/new). The defaults
